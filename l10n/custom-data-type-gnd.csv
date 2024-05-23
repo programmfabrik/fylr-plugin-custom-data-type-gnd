@@ -1,0 +1,93 @@
+key,de-DE,en-US
+custom.data.type.gnd.config.option.mask.editor_style.value.inline,Eingebettet,Embeded
+custom.data.type.gnd.config.option.mask.editor_style.value.popover,Popover,Popover
+custom.data.type.gnd.config.option.mask.show_infopopup.value.false,"""Kein Infopopup""","""No infopopup"""
+custom.data.type.gnd.config.option.mask.show_infopopup.value.true,"""Mit Infopopup""","""With infopopup"""
+custom.data.type.gnd.config.option.schema.exact_types.value.AdministrativeUnit,AdministrativeUnit,AdministrativeUnit
+custom.data.type.gnd.config.option.schema.exact_types.value.ALLE,Alle durchsuchen,Browse all
+custom.data.type.gnd.config.option.schema.exact_types.value.all,Alle,all
+custom.data.type.gnd.config.option.schema.exact_types.value.BuildingOrMemorial,BuildingOrMemorial,BuildingOrMemorial
+custom.data.type.gnd.config.option.schema.exact_types.value.CharactersOrMorphemes,CharactersOrMorphemes,CharactersOrMorphemes
+custom.data.type.gnd.config.option.schema.exact_types.value.CollectivePseudonym,CollectivePseudonym,CollectivePseudonym
+custom.data.type.gnd.config.option.schema.exact_types.value.Country,Country,Country
+custom.data.type.gnd.config.option.schema.exact_types.value.EthnographicName,EthnographicName,EthnographicName
+custom.data.type.gnd.config.option.schema.exact_types.value.ExtraterrestrialTerritory,ExtraterrestrialTerritory,ExtraterrestrialTerritory
+custom.data.type.gnd.config.option.schema.exact_types.value.FictiveCorporateBody,FictiveCorporateBody,FictiveCorporateBody
+custom.data.type.gnd.config.option.schema.exact_types.value.FictivePlace,FictivePlace,FictivePlace
+custom.data.type.gnd.config.option.schema.exact_types.value.FictiveTerm,FictiveTerm,FictiveTerm
+custom.data.type.gnd.config.option.schema.exact_types.value.Gods,Gods,Gods
+custom.data.type.gnd.config.option.schema.exact_types.value.GroupOfPersons,GroupOfPersons,GroupOfPersons
+custom.data.type.gnd.config.option.schema.exact_types.value.HistoricSingleEventOrEra,HistoricSingleEventOrEra,HistoricSingleEventOrEra
+custom.data.type.gnd.config.option.schema.exact_types.value.Language,Language,Language
+custom.data.type.gnd.config.option.schema.exact_types.value.LiteraryOrLegendaryCharacter,LiteraryOrLegendaryCharacter,LiteraryOrLegendaryCharacter
+custom.data.type.gnd.config.option.schema.exact_types.value.MeansOfTransportWithIndividual_name,MeansOfTransportWithIndividual_name,MeansOfTransportWithIndividual_name
+custom.data.type.gnd.config.option.schema.exact_types.value.MeansOfTransportWithIndividualName,MeansOfTransportWithIndividualName,MeansOfTransportWithIndividualName
+custom.data.type.gnd.config.option.schema.exact_types.value.MemberState,MemberState,MemberState
+custom.data.type.gnd.config.option.schema.exact_types.value.NameOfSmallGeographicUnitLyingWithinAnotherGeographicUnit,NameOfSmallGeographicUnitLyingWithinAnotherGeographicUnit,NameOfSmallGeographicUnitLyingWithinAnotherGeographicUnit
+custom.data.type.gnd.config.option.schema.exact_types.value.NaturalGeographicUnit,NaturalGeographicUnit,NaturalGeographicUnit
+custom.data.type.gnd.config.option.schema.exact_types.value.NomenclatureInBiologyOrChemistry,NomenclatureInBiologyOrChemistry,NomenclatureInBiologyOrChemistry
+custom.data.type.gnd.config.option.schema.exact_types.value.OrganOfCorporateBody,OrganOfCorporateBody,OrganOfCorporateBody
+custom.data.type.gnd.config.option.schema.exact_types.value.ProductNameOrBrandName,ProductNameOrBrandName,ProductNameOrBrandName
+custom.data.type.gnd.config.option.schema.exact_types.value.ProjectOrProgram,ProjectOrProgram,ProjectOrProgram
+custom.data.type.gnd.config.option.schema.exact_types.value.Pseudonym,Pseudonym,Pseudonym
+custom.data.type.gnd.config.option.schema.exact_types.value.ReligiousTerritory,ReligiousTerritory,ReligiousTerritory
+custom.data.type.gnd.config.option.schema.exact_types.value.RoyalOrMemberOfARoyalHouse,RoyalOrMemberOfARoyalHouse,RoyalOrMemberOfARoyalHouse
+custom.data.type.gnd.config.option.schema.exact_types.value.SoftwareProduct,SoftwareProduct,SoftwareProduct
+custom.data.type.gnd.config.option.schema.exact_types.value.Spirits,Spirits,Spirits
+custom.data.type.gnd.config.option.schema.exact_types.value.SubjectHeadingSensoStricto,SubjectHeadingSensoStricto,SubjectHeadingSensoStricto
+custom.data.type.gnd.config.option.schema.exact_types.value.TerritorialCorporateBodyOrAdministrativeUnit,TerritorialCorporateBodyOrAdministrativeUnit,TerritorialCorporateBodyOrAdministrativeUnit
+custom.data.type.gnd.config.option.schema.exact_types.value.WayBorderOrLine,WayBorderOrLine,WayBorderOrLine
+custom.data.type.gnd.config.parameter.schema.exact_types.value.label,Auf Subklasse beschränken,Limit to subclass
+custom.data.type.gnd.edit.modal.title|text,GND-Verknüpfung,GND-node
+custom.data.type.gnd.edit.no_gnd,Keine GND-Verknüpfung gesetzt,No valid GND-node
+custom.data.type.gnd.edit.no_valid_gnd,Keine valide GND-Verknüpfung,No valid GND-node
+custom.data.type.gnd.modal.form.text.count,Anzahl Vorschläge,Count suggestions
+custom.data.type.gnd.modal.form.text.count_short,Vorschläge,Suggestions
+custom.data.type.gnd.modal.form.text.label,Text,Text
+custom.data.type.gnd.modal.form.text.result.label,Gewählter Eintrag,Selected entry
+custom.data.type.gnd.modal.form.text.result.placeholder,noch leer,empty
+custom.data.type.gnd.modal.form.text.searchbar,Suchbegriff eingeben,Enter search query
+custom.data.type.gnd.modal.form.text.searchbar.placeholder,Suchbegriff eingeben ...,Enter search query...
+custom.data.type.gnd.modal.form.text.type,Suche auf Typ einschränken,Narrow down search to type
+custom.data.type.gnd.modal.form.text.uri.label,Zugehörige URI,Related URI
+custom.data.type.gnd.modal.form.text.uri.label.placeholder,noch leer,empty
+custom.data.type.gnd.modal.form.url.placeholder,GND-Verknüpfung,GND-node
+custom.data.type.gnd.name,GND-Verknüpfung,GND-node
+custom.data.type.gnd.config.parameter.mask.editor_style,Editor-Stil,Editor style
+custom.data.type.gnd.config.parameter.schema.add_coorporates.value.label,Durchsuche,Search
+custom.data.type.gnd.config.parameter.schema.add_differentiatedpersons.value.label,Durchsuche,Search
+custom.data.type.gnd.config.parameter.schema.add_geographicplaces.value.label,Durchsuche,Search
+custom.data.type.gnd.config.parameter.schema.add_subjects.value.label,Durchsuche,Search
+custom.data.type.gnd.config.parameter.schema.add_works.value.label,Durchsuche,Search
+custom.data.type.gnd.config.parameter.schema.add_conferenceorevent.value.label,Durchsuche,Search
+custom.data.type.gnd.config.parameter.schema.add_coorporates.value.checkbox,Körperschaften,Corporate bodies
+custom.data.type.gnd.config.parameter.schema.add_differentiatedpersons.value.checkbox,Individualisierte Personen,Differentiated persons
+custom.data.type.gnd.config.parameter.schema.add_geographicplaces.value.checkbox,Geografika,Places or geographic names
+custom.data.type.gnd.config.parameter.schema.add_subjects.value.checkbox,Sachbegriffe,Subjects
+custom.data.type.gnd.config.parameter.schema.add_works.value.checkbox,Werke,Works
+custom.data.type.gnd.config.parameter.schema.add_conferenceorevent.value.checkbox,Konferenzen und Veranstaltungen,Conference and events
+custom.data.type.gnd.url.tooltip,zu **%(name)s** bei der Deutschen Nationalbibliothek springen,jump to **%(name)s** at German National Library (DNB)
+server.config.name.system.update_interval_gnd,GND-Update-Einstellungen,GND-Update-Settings
+server.config.parameter.system.update_interval_gnd.days.label,Tage zwischen Updates,Days between updates
+custom.data.type.gnd.config.parameter.mask.editor_display.value.label,Editor-Ansicht,Editor-Display
+custom.data.type.gnd.config.option.mask.editor_display.value.default,Standard,Default
+custom.data.type.gnd.config.option.mask.editor_display.value.condensed,1 Zeile,One-liner
+custom.data.type.gnd.config.parameter.schema.mapbox_api_key.value.label,Mapbox-API-Key,Mapbox-API-Key
+custom.data.type.gnd.modal.form.popup.loadingstring,Lade Informationen..,Loading informations..
+custom.data.type.gnd.modal.form.popup.jskospreview.georef,Karte,Map
+custom.data.type.gnd.modal.form.popup.jskospreview.head,Informationen über den Eintrag,Informations about record
+custom.data.type.gnd.modal.form.popup.jskospreview.name,Name,Name
+custom.data.type.gnd.modal.form.popup.jskospreview.depiction,Abbildung,Depiction
+custom.data.type.gnd.modal.form.popup.jskospreview.livedates,Lebensdaten,Dates of living
+custom.data.type.gnd.modal.form.popup.jskospreview.tillunknown,bis unbekannt,untill unknown
+custom.data.type.gnd.modal.form.popup.jskospreview.unknowntill,unbekannt bis,unknown until
+custom.data.type.gnd.modal.form.popup.jskospreview.establishment,Gründung,Establishment
+custom.data.type.gnd.modal.form.popup.jskospreview.placeOfBusiness,Niederlassung,Place of business
+custom.data.type.gnd.modal.form.popup.jskospreview.placeOfEvent,Veranstaltungsort,Place of event
+custom.data.type.gnd.modal.form.popup.jskospreview.hierarchicallySuperiorOrganisation,Übergeordnete Körperschaft(en),Hierarchically superior organisation
+custom.data.type.gnd.modal.form.popup.jskospreview.placeOfBirth,Geburtsort,Place of birth
+custom.data.type.gnd.modal.form.popup.jskospreview.placeOfDeath,Sterbeort,Place of death
+custom.data.type.gnd.modal.form.popup.jskospreview.profession,Beruf,Profession
+custom.data.type.gnd.modal.form.popup.jskospreview.bio,Biographie,Biographie
+custom.data.type.gnd.modal.form.popup.jskospreview.topic,Themen,Topics
+custom.data.type.gnd.modal.form.popup.jskospreview.synonym,Synonyme,Synonyms

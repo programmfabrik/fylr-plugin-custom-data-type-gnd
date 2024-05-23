@@ -1,0 +1,109 @@
+plugin:
+  name: custom-data-type-gnd
+  version: 1.5
+  url: https://github.com/programmfabrik/fylr-plugin-custom-data-type-gnd
+  displayname:
+    de-DE: gnd-Verknüpfung
+    en-US: gnd-Referencing
+  info:
+    de-DE: Stellt Verknüpfungen mit der Gemeinsamen Normdatei (GND) her.
+    en-US: Use for references to entities of the Integrated Authority File (GND)
+  server:
+    api-version:
+      require: 1
+  l10n: l10n/customDataTypeGND.csv
+  webfrontend:
+    url: customDataTypeGND.js
+    css: customDataTypeGND.css
+    
+base_url_prefix: "webfrontend"
+    
+custom_types:
+  gnd:
+    mapping:
+      conceptName:
+        type: text
+      conceptURI:
+        type: text
+      conceptAncestors:
+        type: text
+      conceptGeoJSON:
+        type: geo_json
+      facetTerm:
+        type: text_l10n
+    config:
+      schema:
+        - name: add_differentiatedpersons
+          parameters:
+            value:
+              type: bool
+        - name: add_coorporates
+          parameters:
+            value:
+              type: bool
+        - name: add_geographicplaces
+          parameters:
+            value:
+              type: bool
+        - name: add_subjects
+          parameters:
+            value:
+              type: bool
+        - name: add_works
+          parameters:
+            value:
+              type: bool
+        - name: add_conferenceorevent
+          parameters:
+            value:
+              type: bool
+        - name: exact_types
+          parameters:
+            value:
+              type: select
+              options: ["ALLE","SubjectHeadingSensoStricto","HistoricSingleEventOrEra","GroupOfPersons","CharactersOrMorphemes","MeansOfTransportWithIndividual_name","FictiveTerm","NomenclatureInBiologyOrChemistry","ProductNameOrBrandName","SoftwareProduct","Language","EthnographicName","MeansOfTransportWithIndividualName","ReligiousTerritory","NaturalGeographicUnit","TerritorialCorporateBodyOrAdministrativeUnit","FictivePlace","BuildingOrMemorial","Country","AdministrativeUnit","ExtraterrestrialTerritory","MemberState","WayBorderOrLine","NameOfSmallGeographicUnitLyingWithinAnotherGeographicUnit","FictiveCorporateBody","OrganOfCorporateBody","ProjectOrProgram","Pseudonym","LiteraryOrLegendaryCharacter","Spirits","RoyalOrMemberOfARoyalHouse","CollectivePseudonym","Gods"]
+        - name: mapbox_api_key
+          parameters:
+            value:
+              type: text
+      mask:
+        - name: editor_display
+          parameters:
+            value:
+              type: select
+              options: ["default", "condensed"]
+    update:
+      plugin_user:
+        reference: system:root
+      exec:
+        service: "node"
+        commands:
+          - prog: "node"
+            stdin:
+              type: body
+            stdout:
+              type: body
+            args:
+              - type: "value"
+                value: "%_exec.pluginDir%/updater/gndUpdater.js"
+              - type: "value"
+                value: "%info.json%"
+      timeout: 60
+      batch_size: 1
+      expires_days: 1
+      interval_base_config: update_interval_gnd.days
+              
+              
+base_config:
+  - name: update_interval_gnd
+    group: update_custom_data_type
+    parameters:
+      days:
+        type: int
+        min: 0
+        default: 0
+        position: 0
+      default_language:
+        type: text
+        default: 'de'
+        position: 1
