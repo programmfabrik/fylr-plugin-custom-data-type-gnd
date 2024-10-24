@@ -497,6 +497,94 @@ class CustomDataTypeGND extends CustomDataTypeWithCommons
 
 
   #######################################################################
+  # returns markup to display in expert search
+  #######################################################################
+  renderSearchInput: (data, opts) ->
+      that = @
+      if not data[@name()]
+          data[@name()] = {}
+
+      that.callFromExpertSearch = true
+
+      form = @renderEditorInput(data, '', {})
+
+      CUI.Events.listen
+            type: "data-changed"
+            node: form
+            call: =>
+                CUI.Events.trigger
+                    type: "search-input-change"
+                    node: form
+                CUI.Events.trigger
+                    type: "editor-changed"
+                    node: form
+                CUI.Events.trigger
+                    type: "change"
+                    node: form
+                CUI.Events.trigger
+                    type: "input"
+                    node: form
+
+      form.DOM
+
+  #######################################################################
+  # make searchfilter for expert-search
+  #######################################################################
+  getSearchFilter: (data, key=@name()) ->
+      that = @
+
+      objecttype = @path()
+      objecttype = objecttype.split('.')
+      objecttype = objecttype[0]
+
+      # search for empty values
+      if data[key+":unset"]
+          filter =
+              type: "in"
+              fields: [ @fullName()+".conceptURI" ]
+              in: [ null ]
+          filter._unnest = true
+          filter._unset_filter = true
+          return filter
+
+      # dropdown or popup without tree or use of searchbar: use sameas
+      filter =
+          type: "complex"
+          search: [
+              type: "in"
+              mode: "fulltext"
+              bool: "must"
+              phrase: false
+              fields: [ @path() + '.' + @name() + ".conceptURI" ]
+          ]
+      if ! data[@name()]
+          filter.search[0].in = [ null ]
+      else if data[@name()]?.conceptURI
+          filter.search[0].in = [data[@name()].conceptURI]
+      else
+          filter = null
+
+      filter
+
+  #######################################################################
+  # make tag for expert-search
+  #######################################################################
+  getQueryFieldBadge: (data) ->
+      if ! data[@name()]
+          value = $$("field.search.badge.without")
+      else if ! data[@name()]?.conceptURI
+          value = $$("field.search.badge.without")
+      else
+          value = data[@name()].conceptName
+
+      name: @nameLocalized()
+      value: value
+
+
+  needsDirectRender: ->
+    return true
+
+  #######################################################################
   # renders the "result" in original form (outside popover)
   __renderButtonByData: (cdata) ->
         
