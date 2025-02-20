@@ -67,8 +67,12 @@ custom.data.type.gnd.config.parameter.schema.add_subjects.value.checkbox,Sachbeg
 custom.data.type.gnd.config.parameter.schema.add_works.value.checkbox,Werke,Works
 custom.data.type.gnd.config.parameter.schema.add_conferenceorevent.value.checkbox,Konferenzen und Veranstaltungen,Conference and events
 custom.data.type.gnd.url.tooltip,zu **%(name)s** bei der Deutschen Nationalbibliothek springen,jump to **%(name)s** at German National Library (DNB)
-server.config.name.system.update_interval_gnd,GND-Update-Einstellungen,GND-Update-Settings
-server.config.parameter.system.update_interval_gnd.days.label,Tage zwischen Updates,Days between updates
+server.config.name.system.update_gnd,GND-Update-Einstellungen,GND-Update-Settings
+server.config.parameter.system.update_gnd.restrict_time.label,Beschränke Updates auf bestimmte Stunden?,Restrict updates to specific hours?
+server.config.parameter.system.update_gnd.restrict_time.checkbox,Ja - beschränken,Yes - restrict
+server.config.parameter.system.update_gnd.from_time.label,Stunde von (Zahl 0-24),Hour from (Int 0-24)
+server.config.parameter.system.update_gnd.to_time.label,Stunde bis (Zahl 0-24),Hour to (Int 0-24)
+server.config.parameter.system.update_gnd.default_language.label,Standard-Datensprache als Fallback für Update (ISO 639-1),Default-data-language (as fallback) for update (ISO 639-1)
 custom.data.type.gnd.config.parameter.mask.editor_display.value.label,Editor-Ansicht,Editor-Display
 custom.data.type.gnd.config.option.mask.editor_display.value.default,Standard,Default
 custom.data.type.gnd.config.option.mask.editor_display.value.condensed,1 Zeile,One-liner
