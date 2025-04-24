@@ -26,6 +26,11 @@ class CustomDataTypeGND extends CustomDataTypeWithCommons
     desiredLanguage = desiredLanguage[0]
 
     desiredLanguage
+
+  #######################################################################
+  # allows usage of "standard (geo)" in maskoptioons
+  supportsGeoStandard: 
+    ->true 
     
   #######################################################################
   # if type is DifferentiatedPerson, PlaceOrGeographicName or CorporateBody, get short info about entry from entityfacts
