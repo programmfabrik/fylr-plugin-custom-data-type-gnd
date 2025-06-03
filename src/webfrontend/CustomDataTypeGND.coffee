@@ -1,10 +1,9 @@
-class CustomDataTypeGND extends CustomDataTypeWithCommons
+class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
 
   #######################################################################
   # return name of plugin
   getCustomDataTypeName: ->
     "custom:base.custom-data-type-gnd.gnd"
-
 
   #######################################################################
   # return name (l10n) of plugin
@@ -32,6 +31,12 @@ class CustomDataTypeGND extends CustomDataTypeWithCommons
   supportsGeoStandard: 
     ->true 
     
+  #######################################################################
+  # configure used facet  
+  getFacet: (opts) ->
+    opts.field = @
+    new CustomDataTypeGNDFacet(opts)
+
   #######################################################################
   # if type is DifferentiatedPerson, PlaceOrGeographicName or CorporateBody, get short info about entry from entityfacts
   __getAdditionalTooltipInfo: (uri, tooltip, extendedInfo_xhr) ->
@@ -680,6 +685,5 @@ class CustomDataTypeGND extends CustomDataTypeWithCommons
       tags.push "✘ Exakter Typ"
 
     tags
-
 
 CustomDataType.register(CustomDataTypeGND)
