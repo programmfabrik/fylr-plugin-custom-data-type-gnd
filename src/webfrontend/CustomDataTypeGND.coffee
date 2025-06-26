@@ -543,10 +543,6 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
   getSearchFilter: (data, key=@name()) ->
       that = @
 
-      objecttype = @path()
-      objecttype = objecttype.split('.')
-      objecttype = objecttype[0]
-
       # search for empty values
       if data[key+":unset"]
           filter =
@@ -556,6 +552,9 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
           filter._unnest = true
           filter._unset_filter = true
           return filter
+
+      else if data[key+":has_value"]
+        return @getHasValueFilter(data, key)
 
       # dropdown or popup without tree or use of searchbar: use sameas
       filter =
@@ -575,20 +574,6 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
           filter = null
 
       filter
-
-  #######################################################################
-  # make tag for expert-search
-  #######################################################################
-  getQueryFieldBadge: (data) ->
-      if ! data[@name()]
-          value = $$("field.search.badge.without")
-      else if ! data[@name()]?.conceptURI
-          value = $$("field.search.badge.without")
-      else
-          value = data[@name()].conceptName
-
-      name: @nameLocalized()
-      value: value
 
 
   needsDirectRender: ->
