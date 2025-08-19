@@ -48,7 +48,7 @@ class GNDUtil
       return false
 
     
-  @getFullTextFromEntityFactsJSON: (efJSON) ->
+  @getFullTextFromEntityFactsJSON: (efJSON, pluginConfig) ->
     _fulltext = ''
 
     # ++
@@ -58,188 +58,193 @@ class GNDUtil
     _fulltext = efJSON['gndIdentifier'] + ' '
 
     # ++
-    if efJSON?.oldAuthorityNumber
+    _fulltext += efJSON['preferredName'] + ' '
+  
+    if not pluginConfig?.fulltext_gnd
+      return _fulltext
+
+    fulltextConfig = pluginConfig.fulltext_gnd
+
+    # ++
+    if efJSON?.oldAuthorityNumber and fulltextConfig?.oldAuthorityNumber 
       for entry in efJSON.oldAuthorityNumber
         _fulltext += entry + ' '
 
     # ++
-    if efJSON?.gndSubjectCategory
+    if efJSON?.gndSubjectCategory and fulltextConfig?.gndSubjectCategory
       for entry in efJSON.gndSubjectCategory
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    _fulltext += efJSON['preferredName'] + ' '
-
-    # ++
-    if efJSON?.variantName
+    if efJSON?.variantName and fulltextConfig?.variantName
       for entry in efJSON.variantName
         _fulltext += entry + ' '
 
     # ++
-    if efJSON?.biographicalOrHistoricalInformation
+    if efJSON?.biographicalOrHistoricalInformation and fulltextConfig?.biographicalOrHistoricalInformation
       for entry in efJSON.biographicalOrHistoricalInformation
         _fulltext += entry + ' '
 
     # ++
-    if efJSON?.dateOfEstablishment
+    if efJSON?.dateOfEstablishment and fulltextConfig?.dateOfEstablishment
       for entry in efJSON.dateOfEstablishment
         _fulltext += entry + ' '
 
     # ++
-    if efJSON?.dateOfPublication
+    if efJSON?.dateOfPublication and fulltextConfig?.dateOfPublication
       for entry in efJSON.dateOfPublication
         _fulltext += entry + ' '
 
     # ++
-    if efJSON?.dateOfBirth
+    if efJSON?.dateOfBirth and fulltextConfig?.dateOfBirth
       _fulltext += efJSON.dateOfBirth + ' '
 
-    if efJSON?.dateOfProduction
+    if efJSON?.dateOfProduction and fulltextConfig?.dateOfProduction
       _fulltext += efJSON.dateOfProduction + ' '
 
     # ++
-    if efJSON?.dateOfDeath
+    if efJSON?.dateOfDeath and fulltextConfig?.dateOfDeath
       _fulltext += efJSON.dateOfDeath + ' '
 
     # + checked
-    if efJSON?.dateOfTermination
+    if efJSON?.dateOfTermination and fulltextConfig?.dateOfTermination
       _fulltext += efJSON.dateOfTermination + ' '
 
     # ++
-    if efJSON?.author
+    if efJSON?.author and fulltextConfig?.author
       for entry in efJSON.author
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.firstAuthor
+    if efJSON?.firstAuthor and fulltextConfig?.firstAuthor
       for entry in efJSON.firstAuthor
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     #
-    if efJSON?.organizerOrHost
+    if efJSON?.organizerOrHost and fulltextConfig?.organizerOrHost
       for entry in efJSON.organizerOrHost
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.gender
+    if efJSON?.gender and fulltextConfig?.gender
       for entry in efJSON.gender
         if entry.label
           _fulltext += entry.label + ' '
 
     #
-    if efJSON?.placeOfEvent
+    if efJSON?.placeOfEvent and fulltextConfig?.placeOfEvent
       for entry in efJSON.placeOfEvent
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.placeOfBirth
+    if efJSON?.placeOfBirth and fulltextConfig?.placeOfBirth
       for entry in efJSON.placeOfBirth
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.placeOfDeath
+    if efJSON?.placeOfDeath and fulltextConfig?.placeOfDeath
       for entry in efJSON.placeOfDeath
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.placeOfBusiness
+    if efJSON?.placeOfBusiness and fulltextConfig?.placeOfBusiness
       for entry in efJSON.placeOfBusiness
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
-    if efJSON?.associatedPlace
+    if efJSON?.associatedPlace and fulltextConfig?.associatedPlace
       for entry in efJSON.associatedPlace
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.topic
+    if efJSON?.topic and fulltextConfig?.topic
       for entry in efJSON.topic
         if entry.label
           _fulltext += entry.label + ' '
 
-    if efJSON?.predecessor
+    if efJSON?.predecessor and fulltextConfig?.predecessor
       for entry in efJSON.predecessor
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.precedingCorporateBody
+    if efJSON?.precedingCorporateBody and fulltextConfig?.precedingCorporateBody
       for entry in efJSON.precedingCorporateBody
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
-    if efJSON?.isA
+    if efJSON?.isA and fulltextConfig?.isA
       for entry in efJSON.isA
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.composer
+    if efJSON?.composer and fulltextConfig?.composer
       for entry in efJSON.composer
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.relatedWork
+    if efJSON?.relatedWork and fulltextConfig?.relatedWork
       for entry in efJSON.relatedWork
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.relatedPerson
+    if efJSON?.relatedPerson and fulltextConfig?.relatedPerson
       for entry in efJSON.relatedPerson
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.precedingPlaceOrGeographicName
+    if efJSON?.precedingPlaceOrGeographicName and fulltextConfig?.precedingPlaceOrGeographicName
       for entry in efJSON.precedingPlaceOrGeographicName
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.hierarchicalSuperiorOfTheCorporateBody
+    if efJSON?.hierarchicalSuperiorOfTheCorporateBody and fulltextConfig?.hierarchicalSuperiorOfTheCorporateBody
       for entry in efJSON.hierarchicalSuperiorOfTheCorporateBody
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.broaderTermInstantial
+    if efJSON?.broaderTermInstantial and fulltextConfig?.broaderTermInstantial
       for entry in efJSON.broaderTermInstantial
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.broaderTermGeneral
+    if efJSON?.broaderTermGeneral and fulltextConfig?.broaderTermGeneral
       for entry in efJSON.broaderTermGeneral
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
     # ++
-    if efJSON?.professionOrOccupation
+    if efJSON?.professionOrOccupation and fulltextConfig?.professionOrOccupation
       for entry in efJSON.professionOrOccupation
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
-    if efJSON?.architect
+    if efJSON?.architect and fulltextConfig?.architect
       for entry in efJSON.architect
         if entry.preferredName
           _fulltext += entry.preferredName + ' '
 
-    if efJSON?.opusNumericDesignationOfMusicalWork
+    if efJSON?.opusNumericDesignationOfMusicalWork and fulltextConfig?.opusNumericDesignationOfMusicalWork
       for entry in efJSON.opusNumericDesignationOfMusicalWork
           _fulltext += entry + ' '
 
     # ++
-    if efJSON?.definition
+    if efJSON?.definition and fulltextConfig?.definition
       for entry in efJSON.definition
           _fulltext += entry + ' '
 

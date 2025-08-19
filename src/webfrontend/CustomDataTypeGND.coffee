@@ -315,6 +315,8 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
               extendedInfo_xhr = new (CUI.XHR)(url: xurl)
               extendedInfo_xhr.start()
               .done((data, status, statusText) ->
+                pluginConfig = ez5.session.getBaseConfig("plugin", "custom-data-type-gnd")
+                
                 resultsGNDID = data['gndIdentifier']
 
                 cdata.conceptURI = data['id']
@@ -330,7 +332,7 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
                     cdata.conceptGeoJSON = geoJSON
 
                 cdata._fulltext =
-                  text: GNDUtil.getFullTextFromEntityFactsJSON(data)
+                  text: GNDUtil.getFullTextFromEntityFactsJSON(data, pluginConfig)
               )
 
               .always(() ->

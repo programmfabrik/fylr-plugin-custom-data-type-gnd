@@ -167,7 +167,7 @@ main = (payload) => {
                             }
                 
                             newCdata._fulltext = {}
-                            newCdata._fulltext.text = GNDUtil.getFullTextFromEntityFactsJSON(data);
+                            newCdata._fulltext.text = GNDUtil.getFullTextFromEntityFactsJSON(data, info?.config?.plugin?.['custom-data-type-gnd']?.config);
                             
                             if (hasChanges(payload.objects[index].data, newCdata)) {
                                 payload.objects[index].data = newCdata;

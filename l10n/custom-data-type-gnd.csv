@@ -73,6 +73,75 @@ server.config.parameter.system.update_gnd.restrict_time.checkbox,Ja - beschränk
 server.config.parameter.system.update_gnd.from_time.label,Stunde von (Zahl 0-24),Hour from (Int 0-24)
 server.config.parameter.system.update_gnd.to_time.label,Stunde bis (Zahl 0-24),Hour to (Int 0-24)
 server.config.parameter.system.update_gnd.default_language.label,Standard-Datensprache als Fallback für Update (ISO 639-1),Default-data-language (as fallback) for update (ISO 639-1)
+server.config.name.system.fulltext_gnd,GND-Volltextsuche-Einstellungen,GND-Fulltext-Search-Settings
+server.config.parameter.system.fulltext_gnd.oldAuthorityNumber.label,Alte Normnummer,Old Authority Number
+server.config.parameter.system.fulltext_gnd.oldAuthorityNumber.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.gndSubjectCategory.label,GND-Sachkategorie,GND Subject Category
+server.config.parameter.system.fulltext_gnd.gndSubjectCategory.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.variantName.label,Variantenname,Variant Name
+server.config.parameter.system.fulltext_gnd.variantName.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.biographicalOrHistoricalInformation.label,Biographische oder historische Angaben,Biographical or Historical Information
+server.config.parameter.system.fulltext_gnd.biographicalOrHistoricalInformation.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.dateOfEstablishment.label,Gründungsdatum,Date Of Establishment
+server.config.parameter.system.fulltext_gnd.dateOfEstablishment.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.dateOfPublication.label,Erscheinungsdatum,Date Of Publication
+server.config.parameter.system.fulltext_gnd.dateOfPublication.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.dateOfBirth.label,Geburtsdatum,Date Of Birth
+server.config.parameter.system.fulltext_gnd.dateOfBirth.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.dateOfProduction.label,Herstellungsdatum,Date Of Production
+server.config.parameter.system.fulltext_gnd.dateOfProduction.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.dateOfDeath.label,Sterbedatum,Date Of Death
+server.config.parameter.system.fulltext_gnd.dateOfDeath.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.dateOfTermination.label,Auflösungsdatum,Date Of Termination
+server.config.parameter.system.fulltext_gnd.dateOfTermination.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.author.label,Autor,Author
+server.config.parameter.system.fulltext_gnd.author.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.firstAuthor.label,Erstautor,First Author
+server.config.parameter.system.fulltext_gnd.firstAuthor.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.organizerOrHost.label,Veranstalter,Organizer Or Host
+server.config.parameter.system.fulltext_gnd.organizerOrHost.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.gender.label,Geschlecht,Gender
+server.config.parameter.system.fulltext_gnd.gender.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.placeOfEvent.label,Veranstaltungsort,Place Of Event
+server.config.parameter.system.fulltext_gnd.placeOfEvent.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.placeOfBirth.label,Geburtsort,Place Of Birth
+server.config.parameter.system.fulltext_gnd.placeOfBirth.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.placeOfDeath.label,Sterbeort,Place Of Death
+server.config.parameter.system.fulltext_gnd.placeOfDeath.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.placeOfBusiness.label,Firmen-/Geschäftssitz,Place Of Business
+server.config.parameter.system.fulltext_gnd.placeOfBusiness.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.associatedPlace.label,Zugehöriger Ort,Associated Place
+server.config.parameter.system.fulltext_gnd.associatedPlace.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.topic.label,Thema,Topic
+server.config.parameter.system.fulltext_gnd.topic.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.predecessor.label,Vorgänger,Predecessor
+server.config.parameter.system.fulltext_gnd.predecessor.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.precedingCorporateBody.label,Vorgängerkörperschaft,Preceding Corporate Body
+server.config.parameter.system.fulltext_gnd.precedingCorporateBody.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.isA.label,Ist ein,Is A
+server.config.parameter.system.fulltext_gnd.isA.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.composer.label,Komponist,Composer
+server.config.parameter.system.fulltext_gnd.composer.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.relatedWork.label,Zugehöriges Werk,Related Work
+server.config.parameter.system.fulltext_gnd.relatedWork.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.relatedPerson.label,Zugehörige Person,Related Person
+server.config.parameter.system.fulltext_gnd.relatedPerson.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.precedingPlaceOrGeographicName.label,Vorgängerort oder geografischer Name,Preceding Place Or Geographic Name
+server.config.parameter.system.fulltext_gnd.precedingPlaceOrGeographicName.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.hierarchicalSuperiorOfTheCorporateBody.label,Übergeordnete Körperschaft,Hierarchical Superior Of The Corporate Body
+server.config.parameter.system.fulltext_gnd.hierarchicalSuperiorOfTheCorporateBody.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.broaderTermInstantial.label,Oberbegriff (instantiell),Broader Term Instantial
+server.config.parameter.system.fulltext_gnd.broaderTermInstantial.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.broaderTermGeneral.label,Oberbegriff (generisch),Broader Term General
+server.config.parameter.system.fulltext_gnd.broaderTermGeneral.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.professionOrOccupation.label,Beruf oder Tätigkeit,Profession Or Occupation
+server.config.parameter.system.fulltext_gnd.professionOrOccupation.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.architect.label,Architekt,Architect
+server.config.parameter.system.fulltext_gnd.architect.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.opusNumericDesignationOfMusicalWork.label,Opuszahl des Musikwerks,Opus Numeric Designation Of Musical Work
+server.config.parameter.system.fulltext_gnd.opusNumericDesignationOfMusicalWork.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.definition.label,Definition,Definition
+server.config.parameter.system.fulltext_gnd.definition.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
 custom.data.type.gnd.config.parameter.mask.editor_display.value.label,Editor-Ansicht,Editor-Display
 custom.data.type.gnd.config.option.mask.editor_display.value.default,Standard,Default
 custom.data.type.gnd.config.option.mask.editor_display.value.condensed,1 Zeile,One-liner

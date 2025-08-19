@@ -118,3 +118,143 @@ base_config:
         type: text
         default: 'de'
         position: 3
+  - name: fulltext_gnd
+    group: include_in_fulltext_search
+    parameters:
+      oldAuthorityNumber:
+        type: bool
+        default: false
+        position: 1
+      gndSubjectCategory:
+        type: bool
+        default: false
+        position: 2
+      variantName:
+        type: bool
+        default: false
+        position: 3
+      biographicalOrHistoricalInformation:
+        type: bool
+        default: false
+        position: 4
+      dateOfEstablishment:
+        type: bool
+        default: false
+        position: 5
+      dateOfPublication:
+        type: bool
+        default: false
+        position: 6
+      dateOfBirth:
+        type: bool
+        default: false
+        position: 7
+      dateOfProduction:
+        type: bool
+        default: false
+        position: 8
+      dateOfDeath:
+        type: bool
+        default: false
+        position: 9
+      dateOfTermination:
+        type: bool
+        default: false
+        position: 10
+      author:
+        type: bool
+        default: false
+        position: 11
+      firstAuthor:
+        type: bool
+        default: false
+        position: 12
+      organizerOrHost:
+        type: bool
+        default: false
+        position: 13
+      gender:
+        type: bool
+        default: false
+        position: 14
+      placeOfEvent:
+        type: bool
+        default: false
+        position: 15
+      placeOfBirth:
+        type: bool
+        default: false
+        position: 16
+      placeOfDeath:
+        type: bool
+        default: false
+        position: 17
+      placeOfBusiness:
+        type: bool
+        default: false
+        position: 18
+      associatedPlace:
+        type: bool
+        default: false
+        position: 19
+      topic:
+        type: bool
+        default: false
+        position: 20
+      predecessor:
+        type: bool
+        default: false
+        position: 21
+      precedingCorporateBody:
+        type: bool
+        default: false
+        position: 22
+      isA:
+        type: bool
+        default: false
+        position: 23
+      composer:
+        type: bool
+        default: false
+        position: 24
+      relatedWork:
+        type: bool
+        default: false
+        position: 25
+      relatedPerson:
+        type: bool
+        default: false
+        position: 26
+      precedingPlaceOrGeographicName:
+        type: bool
+        default: false
+        position: 27
+      hierarchicalSuperiorOfTheCorporateBody:
+        type: bool
+        default: false
+        position: 28
+      broaderTermInstantial:
+        type: bool
+        default: false
+        position: 29
+      broaderTermGeneral:
+        type: bool
+        default: false
+        position: 30
+      professionOrOccupation:
+        type: bool
+        default: false
+        position: 31
+      architect:
+        type: bool
+        default: false
+        position: 32
+      opusNumericDesignationOfMusicalWork:
+        type: bool
+        default: false
+        position: 33
+      definition:
+        type: bool
+        default: false
+        position: 34
+        
