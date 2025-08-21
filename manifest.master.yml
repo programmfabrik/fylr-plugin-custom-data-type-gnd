@@ -123,146 +123,146 @@ base_config:
     parameters:
       oldAuthorityNumber:
         type: bool
-        default: false
+        default: true
         position: 1
       gndSubjectCategory:
         type: bool
-        default: false
+        default: true
         position: 2
       variantName:
         type: bool
-        default: false
+        default: true
         position: 3
       biographicalOrHistoricalInformation:
         type: bool
-        default: false
+        default: true
         position: 4
       dateOfEstablishment:
         type: bool
-        default: false
+        default: true
         position: 5
       dateOfPublication:
         type: bool
-        default: false
+        default: true
         position: 6
       dateOfBirth:
         type: bool
-        default: false
+        default: true
         position: 7
       dateOfProduction:
         type: bool
-        default: false
+        default: true
         position: 8
       dateOfDeath:
         type: bool
-        default: false
+        default: true
         position: 9
       dateOfTermination:
         type: bool
-        default: false
+        default: true
         position: 10
       author:
         type: bool
-        default: false
+        default: true
         position: 11
       firstAuthor:
         type: bool
-        default: false
+        default: true
         position: 12
       organizerOrHost:
         type: bool
-        default: false
+        default: true
         position: 13
       gender:
         type: bool
-        default: false
+        default: true
         position: 14
       placeOfEvent:
         type: bool
-        default: false
+        default: true
         position: 15
       placeOfBirth:
         type: bool
-        default: false
+        default: true
         position: 16
       placeOfDeath:
         type: bool
-        default: false
+        default: true
         position: 17
       placeOfBusiness:
         type: bool
-        default: false
+        default: true
         position: 18
       associatedPlace:
         type: bool
-        default: false
+        default: true
         position: 19
       topic:
         type: bool
-        default: false
+        default: true
         position: 20
       predecessor:
         type: bool
-        default: false
+        default: true
         position: 21
       precedingCorporateBody:
         type: bool
-        default: false
+        default: true
         position: 22
       isA:
         type: bool
-        default: false
+        default: true
         position: 23
       composer:
         type: bool
-        default: false
+        default: true
         position: 24
       relatedWork:
         type: bool
-        default: false
+        default: true
         position: 25
       relatedPerson:
         type: bool
-        default: false
+        default: true
         position: 26
       precedingPlaceOrGeographicName:
         type: bool
-        default: false
+        default: true
         position: 27
       hierarchicalSuperiorOfTheCorporateBody:
         type: bool
-        default: false
+        default: true
         position: 28
       broaderTermInstantial:
         type: bool
-        default: false
+        default: true
         position: 29
       broaderTermGeneral:
         type: bool
-        default: false
+        default: true
         position: 30
       professionOrOccupation:
         type: bool
-        default: false
+        default: true
         position: 31
       architect:
         type: bool
-        default: false
+        default: true
         position: 32
       opusNumericDesignationOfMusicalWork:
         type: bool
-        default: false
+        default: true
         position: 33
       definition:
         type: bool
-        default: false
+        default: true
         position: 34
       succeedingCorporateBody:
         type: bool
-        default: false
+        default: true
         position: 35
       succeedingPlaceOrGeographicName:
         type: bool
-        default: false
+        default: true
         position: 36
         
