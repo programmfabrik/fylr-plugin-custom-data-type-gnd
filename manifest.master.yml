@@ -257,4 +257,12 @@ base_config:
         type: bool
         default: false
         position: 34
+      succeedingCorporateBody:
+        type: bool
+        default: false
+        position: 35
+      succeedingPlaceOrGeographicName:
+        type: bool
+        default: false
+        position: 36
         

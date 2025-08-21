@@ -142,6 +142,10 @@ server.config.parameter.system.fulltext_gnd.opusNumericDesignationOfMusicalWork.
 server.config.parameter.system.fulltext_gnd.opusNumericDesignationOfMusicalWork.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
 server.config.parameter.system.fulltext_gnd.definition.label,Definition,Definition
 server.config.parameter.system.fulltext_gnd.definition.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.succeedingCorporateBody.label,Nachfolgende Körperschaft,Succeeding Corporate Body
+server.config.parameter.system.fulltext_gnd.succeedingCorporateBody.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.parameter.system.fulltext_gnd.succeedingPlaceOrGeographicName.label,Nachfolgendes Geografikum,Succeeding Place Or Geographic Name
+server.config.parameter.system.fulltext_gnd.succeedingPlaceOrGeographicName.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
 custom.data.type.gnd.config.parameter.mask.editor_display.value.label,Editor-Ansicht,Editor-Display
 custom.data.type.gnd.config.option.mask.editor_display.value.default,Standard,Default
 custom.data.type.gnd.config.option.mask.editor_display.value.condensed,1 Zeile,One-liner

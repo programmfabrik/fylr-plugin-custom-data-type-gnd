@@ -73,8 +73,8 @@ class GNDUtil
     # ++
     if efJSON?.gndSubjectCategory and fulltextConfig?.gndSubjectCategory
       for entry in efJSON.gndSubjectCategory
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.variantName and fulltextConfig?.variantName
@@ -114,20 +114,20 @@ class GNDUtil
     # ++
     if efJSON?.author and fulltextConfig?.author
       for entry in efJSON.author
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.firstAuthor and fulltextConfig?.firstAuthor
       for entry in efJSON.firstAuthor
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     #
     if efJSON?.organizerOrHost and fulltextConfig?.organizerOrHost
       for entry in efJSON.organizerOrHost
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.gender and fulltextConfig?.gender
@@ -138,31 +138,31 @@ class GNDUtil
     #
     if efJSON?.placeOfEvent and fulltextConfig?.placeOfEvent
       for entry in efJSON.placeOfEvent
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.placeOfBirth and fulltextConfig?.placeOfBirth
       for entry in efJSON.placeOfBirth
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.placeOfDeath and fulltextConfig?.placeOfDeath
       for entry in efJSON.placeOfDeath
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.placeOfBusiness and fulltextConfig?.placeOfBusiness
       for entry in efJSON.placeOfBusiness
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     if efJSON?.associatedPlace and fulltextConfig?.associatedPlace
       for entry in efJSON.associatedPlace
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.topic and fulltextConfig?.topic
@@ -172,72 +172,72 @@ class GNDUtil
 
     if efJSON?.predecessor and fulltextConfig?.predecessor
       for entry in efJSON.predecessor
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.precedingCorporateBody and fulltextConfig?.precedingCorporateBody
       for entry in efJSON.precedingCorporateBody
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     if efJSON?.isA and fulltextConfig?.isA
       for entry in efJSON.isA
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.composer and fulltextConfig?.composer
       for entry in efJSON.composer
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.relatedWork and fulltextConfig?.relatedWork
       for entry in efJSON.relatedWork
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.relatedPerson and fulltextConfig?.relatedPerson
       for entry in efJSON.relatedPerson
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.precedingPlaceOrGeographicName and fulltextConfig?.precedingPlaceOrGeographicName
       for entry in efJSON.precedingPlaceOrGeographicName
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.hierarchicalSuperiorOfTheCorporateBody and fulltextConfig?.hierarchicalSuperiorOfTheCorporateBody
       for entry in efJSON.hierarchicalSuperiorOfTheCorporateBody
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.broaderTermInstantial and fulltextConfig?.broaderTermInstantial
       for entry in efJSON.broaderTermInstantial
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.broaderTermGeneral and fulltextConfig?.broaderTermGeneral
       for entry in efJSON.broaderTermGeneral
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     # ++
     if efJSON?.professionOrOccupation and fulltextConfig?.professionOrOccupation
       for entry in efJSON.professionOrOccupation
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     if efJSON?.architect and fulltextConfig?.architect
       for entry in efJSON.architect
-        if entry.preferredName
-          _fulltext += entry.preferredName + ' '
+        if entry.label
+          _fulltext += entry.label + ' '
 
     if efJSON?.opusNumericDesignationOfMusicalWork and fulltextConfig?.opusNumericDesignationOfMusicalWork
       for entry in efJSON.opusNumericDesignationOfMusicalWork
@@ -247,6 +247,19 @@ class GNDUtil
     if efJSON?.definition and fulltextConfig?.definition
       for entry in efJSON.definition
           _fulltext += entry + ' '
+
+    # ++
+    if efJSON?.succeedingCorporateBody and fulltextConfig?.succeedingCorporateBody
+      for entry in efJSON.succeedingCorporateBody
+        if entry.label
+          _fulltext += entry.label + ' '
+
+    # ++
+    if efJSON?.succeedingPlaceOrGeographicName and fulltextConfig?.succeedingPlaceOrGeographicName
+      for entry in efJSON.succeedingPlaceOrGeographicName
+        if entry.label
+          _fulltext += entry.label + ' '
+
 
     return _fulltext
 
