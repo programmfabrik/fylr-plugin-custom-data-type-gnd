@@ -62,6 +62,22 @@ function isInTimeRange(currentHour, fromHour, toHour) {
     }
 }
 
+function isExpired(data) {
+    if (!data._expires_at) return false
+
+    const now = new Date()
+    const diff = data._expires_at - now;
+
+    return diff <= 0
+}
+
+function getNewCustomExpiresAt() {
+    const now = new Date()
+    const customExpirationConfig = info?.config?.plugin?.['custom-data-type-gnd']?.config?.update_gnd?.custom_expires_days || 1
+
+    return now.setDate(now.getDay() + customExpirationConfig);
+}
+
 main = (payload) => {
     switch (payload.action) {
         case "start_update":
@@ -81,6 +97,8 @@ main = (payload) => {
             // collect URIs
             let URIList = [];
             for (var i = 0; i < payload.objects.length; i++) {
+                if (!isExpired(payload.objects[i].data.conceptURI)) continue;
+
                 URIList.push(payload.objects[i].data.conceptURI);
             }
             // unique urilist
@@ -181,9 +199,14 @@ main = (payload) => {
                             newCdata._fulltext = {}
                             newCdata._fulltext.text = GNDUtil.getFullTextFromEntityFactsJSON(data, info?.config?.plugin?.['custom-data-type-gnd']?.config);
 
+                            const newExpiresAt = getNewCustomExpiresAt()
                             if (hasChanges(payload.objects[index].data, newCdata)) {
+                                newCdata._expires_at = newExpiresAt
                                 payload.objects[index].data = newCdata;
-                            } else { }
+                            } else {
+                                originalCdata._expires_at = newExpiresAt
+                                payload.objects[index].data = originalCdata
+                             }
                         }
                     } else {
                         console.error('No matching record found');
