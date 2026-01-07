@@ -62,7 +62,7 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
       # abort eventually running request
       extendedInfo_xhr.abort()
     # start new request
-    xurl = location.protocol + '//jsontojsonp.gbv.de/?url=http://hub.culturegraph.org/entityfacts/' + gndID
+    xurl = 'https://jsontojsonp.gbv.de/?url=http://hub.culturegraph.org/entityfacts/' + gndID
     extendedInfo_xhr = new (CUI.XHR)(url: xurl)
     extendedInfo_xhr.start()
     .done((data, status, statusText) ->
@@ -261,7 +261,7 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
           searchsuggest_xhr.xhr.abort()
 
       # start new request
-      searchsuggest_xhr.xhr = new (CUI.XHR)(url: location.protocol + '//ws.gbv.de/suggest/gnd/?searchterm=' + gnd_searchterm + '&type=' + gnd_searchtype + subclassQuery + '&count=' + gnd_countSuggestions)
+      searchsuggest_xhr.xhr = new (CUI.XHR)(url: 'https://ws.gbv.de/suggest/gnd/?searchterm=' + gnd_searchterm + '&type=' + gnd_searchtype + subclassQuery + '&count=' + gnd_countSuggestions)
       searchsuggest_xhr.xhr.start().done((data, status, statusText) ->
 
           # init xhr for tooltipcontent
