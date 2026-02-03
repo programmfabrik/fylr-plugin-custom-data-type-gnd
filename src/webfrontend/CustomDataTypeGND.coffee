@@ -84,45 +84,44 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
               htmlContent += '<tr><td>' + $$('custom.data.type.gnd.modal.form.popup.jskospreview.depiction') + ':</td><td><img src="' + depiction.thumbnail['@id'] + '" style="border: 0; max.width:120px; max-height:150px;" /></td></tr>'
           # Karte
           if data.location
-              if that.getCustomSchemaSettings().mapbox_api_key?.value
-                  mapbox_api_key = that.getCustomSchemaSettings().mapbox_api_key?.value
-                  if mapbox_api_key
-                      # Konvertierung von Koordinaten-Strings zu Zahlen
-                      convertCoordinatesToNumbers = (geometry) ->
-                          if geometry.type is "Point"
-                            geometry.coordinates = geometry.coordinates.map(Number)
-                          else if geometry.type in ["Polygon", "MultiPolygon", "LineString", "MultiLineString"]
-                            geometry.coordinates = geometry.coordinates.map (coord) ->
-                              if Array.isArray(coord[0])
-                                coord.map (c) -> c.map(Number)
-                              else
-                                coord.map(Number)
-                          return geometry
+              mapbox_api_key = that.getMapboxApiKey()
+              if mapbox_api_key
+                  # Konvertierung von Koordinaten-Strings zu Zahlen
+                  convertCoordinatesToNumbers = (geometry) ->
+                      if geometry.type is "Point"
+                        geometry.coordinates = geometry.coordinates.map(Number)
+                      else if geometry.type in ["Polygon", "MultiPolygon", "LineString", "MultiLineString"]
+                        geometry.coordinates = geometry.coordinates.map (coord) ->
+                          if Array.isArray(coord[0])
+                            coord.map (c) -> c.map(Number)
+                          else
+                            coord.map(Number)
+                      return geometry
 
-                      # generates static mapbox-map via geojson
-                      # compare to https://www.mapbox.com/mapbox.js/example/v1.0.0/static-map-from-geojson-with-geo-viewport/
-                      jsonStr = '{"type": "FeatureCollection","features": []}'
-                      json = JSON.parse(jsonStr)
-                      data.location.properties ?= {}
-                      data.location.geometry = convertCoordinatesToNumbers(data.location.geometry)
-                      json.features.push data.location
+                  # generates static mapbox-map via geojson
+                  # compare to https://www.mapbox.com/mapbox.js/example/v1.0.0/static-map-from-geojson-with-geo-viewport/
+                  jsonStr = '{"type": "FeatureCollection","features": []}'
+                  json = JSON.parse(jsonStr)
+                  data.location.properties ?= {}
+                  data.location.geometry = convertCoordinatesToNumbers(data.location.geometry)
+                  json.features.push data.location
 
-                      bounds = geojsonExtent(json)
-                      if bounds
-                        size = [
-                          500
-                          300
-                        ]
-                        vp = geoViewport.viewport(bounds, size)
-                        geoJSON = json.features[0]
-                        geoJSON.properties['stroke-width'] = 4
-                        geoJSON.properties['stroke'] = '#C20000'
-                        geoJSONString = JSON.stringify(geoJSON)
-                        encodedGeoJSONString = encodeURIComponent(geoJSONString)
-                        if vp.zoom > 16
-                          vp.zoom = 15;
-                        imageSrc = 'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v12/static/geojson(' + encodedGeoJSONString + ')/' +  vp.center.join(',') + ',' + vp.zoom + '/' + size.join('x') + '@2x?access_token=' + mapbox_api_key
-                        htmlContent += "<tr><td>" + $$('custom.data.type.gnd.modal.form.popup.jskospreview.georef') + "</td><td><div class=\"mapImage\" style=\"width: 100%; height: 150px; background-size: contain; background-image: url('" + imageSrc  + "');\"></div></td></tr>"
+                  bounds = geojsonExtent(json)
+                  if bounds
+                    size = [
+                      500
+                      300
+                    ]
+                    vp = geoViewport.viewport(bounds, size)
+                    geoJSON = json.features[0]
+                    geoJSON.properties['stroke-width'] = 4
+                    geoJSON.properties['stroke'] = '#C20000'
+                    geoJSONString = JSON.stringify(geoJSON)
+                    encodedGeoJSONString = encodeURIComponent(geoJSONString)
+                    if vp.zoom > 16
+                      vp.zoom = 15;
+                    imageSrc = 'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v12/static/geojson(' + encodedGeoJSONString + ')/' +  vp.center.join(',') + ',' + vp.zoom + '/' + size.join('x') + '@2x?access_token=' + mapbox_api_key
+                    htmlContent += "<tr><td>" + $$('custom.data.type.gnd.modal.form.popup.jskospreview.georef') + "</td><td><div class=\"mapImage\" style=\"width: 100%; height: 150px; background-size: contain; background-image: url('" + imageSrc  + "');\"></div></td></tr>"
 
 
           # Lebensdaten (DifferentiatedPerson)
@@ -680,5 +679,17 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
       tags.push "✘ Exakter Typ"
 
     tags
+  
+  getMapboxApiKey: () ->
+    mapbox_api_key = @.getCustomSchemaSettings()?.mapbox_api_key?.value
+    if mapbox_api_key
+      return mapbox_api_key
+    
+    baseConfig = ez5.session.getBaseConfig("plugin", "custom-data-type-gnd")
+    mapbox_api_key = baseConfig?.mapbox_gnd?.mapbox_api_key
+    if mapbox_api_key
+      return mapbox_api_key
+    
+    return null
 
 CustomDataType.register(CustomDataTypeGND)

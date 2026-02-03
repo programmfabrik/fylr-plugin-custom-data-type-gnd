@@ -147,6 +147,8 @@ server.config.parameter.system.fulltext_gnd.succeedingCorporateBody.label,Nachfo
 server.config.parameter.system.fulltext_gnd.succeedingCorporateBody.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
 server.config.parameter.system.fulltext_gnd.succeedingPlaceOrGeographicName.label,Nachfolgendes Geografikum,Succeeding Place Or Geographic Name
 server.config.parameter.system.fulltext_gnd.succeedingPlaceOrGeographicName.checkbox,In Volltextsuche aufnehmen,Include in fulltext search
+server.config.name.system.mapbox_gnd,Mapbox-Einstellungen,Mapbox-Config
+server.config.parameter.system.mapbox_gnd.mapbox_api_key.label,Mapbox-Api-Key (für Kartenanzeige benötigt),Mapbox Api-Key (required for map display)
 custom.data.type.gnd.config.parameter.mask.editor_display.value.label,Editor-Ansicht,Editor-Display
 custom.data.type.gnd.config.option.mask.editor_display.value.default,Standard,Default
 custom.data.type.gnd.config.option.mask.editor_display.value.condensed,1 Zeile,One-liner

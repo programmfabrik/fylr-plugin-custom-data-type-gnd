@@ -123,6 +123,12 @@ base_config:
         min: 1
         default: 1
         position: 4
+  - name: mapbox_gnd
+    group: mapbox_update_custom_data_type
+    parameters:
+      mapbox_api_key:
+        type: text
+        position: 0        
   - name: fulltext_gnd
     group: include_in_fulltext_search
     parameters:
