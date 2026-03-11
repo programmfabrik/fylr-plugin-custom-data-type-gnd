@@ -681,10 +681,6 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
     tags
   
   getMapboxApiKey: () ->
-    mapbox_api_key = @.getCustomSchemaSettings()?.mapbox_api_key?.value
-    if mapbox_api_key
-      return mapbox_api_key
-    
     baseConfig = ez5.session.getBaseConfig("plugin", "custom-data-type-gnd")
     mapbox_api_key = baseConfig?.mapbox_gnd?.mapbox_api_key
     if mapbox_api_key

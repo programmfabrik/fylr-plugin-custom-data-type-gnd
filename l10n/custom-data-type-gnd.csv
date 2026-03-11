@@ -152,7 +152,6 @@ server.config.parameter.system.mapbox_gnd.mapbox_api_key.label,Mapbox-Api-Key (f
 custom.data.type.gnd.config.parameter.mask.editor_display.value.label,Editor-Ansicht,Editor-Display
 custom.data.type.gnd.config.option.mask.editor_display.value.default,Standard,Default
 custom.data.type.gnd.config.option.mask.editor_display.value.condensed,1 Zeile,One-liner
-custom.data.type.gnd.config.parameter.schema.mapbox_api_key.value.label,Mapbox-API-Key,Mapbox-API-Key
 custom.data.type.gnd.modal.form.popup.loadingstring,Lade Informationen..,Loading informations..
 custom.data.type.gnd.modal.form.popup.jskospreview.georef,Karte,Map
 custom.data.type.gnd.modal.form.popup.jskospreview.head,Informationen über den Eintrag,Informations about record

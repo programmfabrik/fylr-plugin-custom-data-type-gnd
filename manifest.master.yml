@@ -64,10 +64,6 @@ custom_types:
             value:
               type: select
               options: ["ALLE","SubjectHeadingSensoStricto","HistoricSingleEventOrEra","GroupOfPersons","CharactersOrMorphemes","MeansOfTransportWithIndividual_name","FictiveTerm","NomenclatureInBiologyOrChemistry","ProductNameOrBrandName","SoftwareProduct","Language","EthnographicName","MeansOfTransportWithIndividualName","ReligiousTerritory","NaturalGeographicUnit","TerritorialCorporateBodyOrAdministrativeUnit","FictivePlace","BuildingOrMemorial","Country","AdministrativeUnit","ExtraterrestrialTerritory","MemberState","WayBorderOrLine","NameOfSmallGeographicUnitLyingWithinAnotherGeographicUnit","FictiveCorporateBody","OrganOfCorporateBody","ProjectOrProgram","Pseudonym","LiteraryOrLegendaryCharacter","Spirits","RoyalOrMemberOfARoyalHouse","CollectivePseudonym","Gods"]
-        - name: mapbox_api_key
-          parameters:
-            value:
-              type: text
       mask:
         - name: editor_display
           parameters:
