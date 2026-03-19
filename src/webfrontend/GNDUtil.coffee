@@ -263,7 +263,7 @@ class GNDUtil
     if efJSON?.hasGeometry and fulltextConfig?.location
       efJsonGeoJson = @.getGEOJSONFromObject(efJSON)
       if efJsonGeoJson
-        _fulltext += geoJSON.geometry.coordinates.join(" ")
+        _fulltext += efJsonGeoJson.geometry.coordinates.join(" ")
 
 
     return _fulltext
