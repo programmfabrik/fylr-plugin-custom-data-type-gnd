@@ -66,7 +66,8 @@ function getNewCustomExpiresAt() {
     const newExpiresAt = new Date()
     const customExpirationConfig = info?.config?.plugin?.['custom-data-type-gnd']?.config?.update_gnd?.custom_expires_days || 1
 
-    newExpiresAt.setDate(newExpiresAt.getDay() + customExpirationConfig);
+    newExpiresAt.setDate(newExpiresAt.getDate() + customExpirationConfig);
+
     return newExpiresAt.toISOString()
 }
 
@@ -189,7 +190,7 @@ main = (payload) => {
                             newCdata._fulltext = {}
                             newCdata._fulltext.text = GNDUtil.getFullTextFromEntityFactsJSON(data, info?.config?.plugin?.['custom-data-type-gnd']?.config);
 
-                            
+
                             if (hasChanges(payload.objects[index].data, newCdata)) {
                                 payload.objects[index].data = newCdata;
                             } else {
