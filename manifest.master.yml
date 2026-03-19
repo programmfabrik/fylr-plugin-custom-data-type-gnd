@@ -272,4 +272,8 @@ base_config:
         type: bool
         default: true
         position: 36
+      location:
+        type: bool
+        default: true
+        position: 37
         

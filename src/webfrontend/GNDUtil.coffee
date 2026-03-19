@@ -259,6 +259,11 @@ class GNDUtil
       for entry in efJSON.succeedingPlaceOrGeographicName
         if entry.label
           _fulltext += entry.label + ' '
+    
+    if efJSON?.hasGeometry and fulltextConfig?.location
+      efJsonGeoJson = @.getGEOJSONFromObject(efJSON)
+      if efJsonGeoJson
+        _fulltext += geoJSON.geometry.coordinates.join(" ")
 
 
     return _fulltext
