@@ -62,7 +62,8 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
       # abort eventually running request
       extendedInfo_xhr.abort()
     # start new request
-    xurl = 'https://jsontojsonp.gbv.de/?url=http://hub.culturegraph.org/entityfacts/' + gndID
+    
+    xurl = "https://jsontojsonp.gbv.de/?url=https://uri.gbv.de/terminology/entityfacts/#{gndID}?format=json"
     extendedInfo_xhr = new (CUI.XHR)(url: xurl)
     extendedInfo_xhr.start()
     .done((data, status, statusText) ->
@@ -309,16 +310,14 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
               GNDId = GNDURIParts.pop()
               cdata.conceptName = btn.getText()
 
-              # get more informations from lobid.org
-              xurl = 'https://lobid.org/gnd/' + GNDId + '.json'
+              # get more informations from entityfacts
+              xurl = "https://uri.gbv.de/terminology/entityfacts/#{GNDId}?format=json"
               extendedInfo_xhr = new (CUI.XHR)(url: xurl)
               extendedInfo_xhr.start()
               .done((data, status, statusText) ->
                 pluginConfig = ez5.session.getBaseConfig("plugin", "custom-data-type-gnd")
                 
-                resultsGNDID = data['gndIdentifier']
-
-                cdata.conceptURI = data['id']
+                cdata.conceptURI = data['@id']
 
                 databaseLanguages = that.getDatabaseLanguages()
                 

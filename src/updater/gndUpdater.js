@@ -101,7 +101,7 @@ main = (payload) => {
             URIList.forEach((uri) => {
                 var gndURIParts = uri.split('/');
                 let gndID = gndURIParts.pop();
-                let dataRequestUrl = 'https://lobid.org/gnd/' + gndID + '.json'
+                let dataRequestUrl = `https://uri.gbv.de/terminology/entityfacts/${gndID}?format=json`
                 let dataRequest = fetch(dataRequestUrl);
                 requests.push({
                     url: dataRequestUrl,
@@ -299,7 +299,7 @@ outputErr = (err2) => {
             ////////////////////////////////////////////////////////////////////////////
             // availabilityCheck for gnd-api (lobid)
             ////////////////////////////////////////////////////////////////////////////
-            let testURL = 'https://lobid.org/gnd/4284318-2.json';
+            let testURL = "https://uri.gbv.de/terminology/entityfacts/4284318-2?format=json";
             https.get(testURL, res => {
                 let testData = [];
                 res.on('data', chunk => {

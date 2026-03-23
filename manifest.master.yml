@@ -128,152 +128,92 @@ base_config:
   - name: fulltext_gnd
     group: include_in_fulltext_search
     parameters:
-      oldAuthorityNumber:
-        type: bool
-        default: true
-        position: 1
-      gndSubjectCategory:
-        type: bool
-        default: true
-        position: 2
       variantName:
         type: bool
         default: true
-        position: 3
+        position: 1
       biographicalOrHistoricalInformation:
         type: bool
         default: true
-        position: 4
+        position: 2
       dateOfEstablishment:
         type: bool
         default: true
-        position: 5
-      dateOfPublication:
-        type: bool
-        default: true
-        position: 6
+        position: 3
       dateOfBirth:
         type: bool
         default: true
-        position: 7
+        position: 4
       dateOfProduction:
         type: bool
         default: true
-        position: 8
+        position: 5
       dateOfDeath:
         type: bool
         default: true
-        position: 9
+        position: 6
       dateOfTermination:
         type: bool
         default: true
-        position: 10
-      author:
-        type: bool
-        default: true
-        position: 11
-      firstAuthor:
-        type: bool
-        default: true
-        position: 12
+        position: 7
       organizerOrHost:
         type: bool
         default: true
-        position: 13
+        position: 8
       gender:
         type: bool
         default: true
-        position: 14
+        position: 9
       placeOfEvent:
         type: bool
         default: true
-        position: 15
+        position: 10
       placeOfBirth:
         type: bool
         default: true
-        position: 16
+        position: 11
       placeOfDeath:
         type: bool
         default: true
-        position: 17
+        position: 12
       placeOfBusiness:
         type: bool
         default: true
-        position: 18
+        position: 13
       associatedPlace:
         type: bool
         default: true
-        position: 19
-      topic:
-        type: bool
-        default: true
-        position: 20
+        position: 14
       predecessor:
         type: bool
         default: true
-        position: 21
-      precedingCorporateBody:
-        type: bool
-        default: true
-        position: 22
+        position: 15
       isA:
         type: bool
         default: true
-        position: 23
-      composer:
-        type: bool
-        default: true
-        position: 24
-      relatedWork:
-        type: bool
-        default: true
-        position: 25
+        position: 16
       relatedPerson:
         type: bool
         default: true
-        position: 26
-      precedingPlaceOrGeographicName:
+        position: 17
+      isPartOf:
         type: bool
         default: true
-        position: 27
-      hierarchicalSuperiorOfTheCorporateBody:
-        type: bool
-        default: true
-        position: 28
-      broaderTermInstantial:
-        type: bool
-        default: true
-        position: 29
-      broaderTermGeneral:
-        type: bool
-        default: true
-        position: 30
+        position: 18
       professionOrOccupation:
         type: bool
         default: true
-        position: 31
+        position: 19
       architect:
         type: bool
         default: true
-        position: 32
-      opusNumericDesignationOfMusicalWork:
+        position: 20
+      successor:
         type: bool
         default: true
-        position: 33
-      definition:
-        type: bool
-        default: true
-        position: 34
-      succeedingCorporateBody:
-        type: bool
-        default: true
-        position: 35
-      succeedingPlaceOrGeographicName:
-        type: bool
-        default: true
-        position: 36
+        position: 21
       location:
         type: bool
         default: true
-        position: 37
+        position: 22
         
