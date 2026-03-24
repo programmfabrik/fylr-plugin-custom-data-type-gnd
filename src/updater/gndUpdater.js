@@ -307,7 +307,7 @@ outputErr = (err2) => {
                 });
                 res.on('end', () => {
                     const testVocab = JSON.parse(Buffer.concat(testData).toString());
-                    if (testVocab.gndIdentifier == "4284318-2") {
+                    if (testVocab['@id'] == "https://d-nb.info/gnd/4284318-2") {
                         ////////////////////////////////////////////////////////////////////////////
                         // test successfull --> continue with custom-data-type-update
                         ////////////////////////////////////////////////////////////////////////////

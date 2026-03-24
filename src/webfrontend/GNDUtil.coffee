@@ -51,50 +51,40 @@ class GNDUtil
   @getFullTextFromEntityFactsJSON: (efJSON, pluginConfig) ->
     _fulltext = ''
 
-    # changed: lobid used 'id', entityfacts uses '@id'
-    _fulltext += efJSON['@id'] + ' '
-
-    # missing in entityfacts: gndIdentifier, replace with derivative of @id
-    # _fulltext = efJSON['gndIdentifier'] + ' '
-    _fulltext = efJSON['@id'].split('/').at(-1) + ' '
-
-    # same in both: preferredName
-    _fulltext += efJSON['preferredName'] + ' '
-
     if not pluginConfig?.fulltext_gnd
       return _fulltext
-
     fulltextConfig = pluginConfig.fulltext_gnd
+    
+    # changed: lobid used 'id', entityfacts uses '@id'
+    if efJSON['@id'] and fulltextConfig?.id
+      _fulltext += efJSON['@id'] + ' '
 
-    # missing in entityfacts: oldAuthorityNumber
-    # if efJSON?.oldAuthorityNumber and fulltextConfig?.oldAuthorityNumber
-    #   for entry in efJSON.oldAuthorityNumber
-    #     _fulltext += entry + ' '
-
-    # missing in entityfacts: gndSubjectCategory
-    # if efJSON?.gndSubjectCategory and fulltextConfig?.gndSubjectCategory
-    #   for entry in efJSON.gndSubjectCategory
-    #     if entry.label
-    #       _fulltext += entry.label + ' '
+    # missing in entityfacts: gndIdentifier, replace with derivative of @id
+    if efJSON['@id'] and fulltextConfig?.gndIdentifier
+      _fulltext = efJSON['@id'].split('/').at(-1) + ' '
+    
+    # same in both: preferredName
+    if efJSON?.preferredName and fulltextConfig?.preferredName
+      _fulltext += efJSON.preferredName + ' '
 
     # same in both: variantName
     if efJSON?.variantName and fulltextConfig?.variantName
       for entry in efJSON.variantName
         _fulltext += entry + ' '
 
+    # newly added for entityfacts
+    if efJSON?.completeName and fulltextConfig?.completeName
+      for entry in efJSON.completeName
+        _fulltext += entry + ' '
+    
     # same key in both; changed: lobid returns array, entityfacts returns a single string
     if efJSON?.biographicalOrHistoricalInformation and fulltextConfig?.biographicalOrHistoricalInformation
-      _fulltext += efJSON.biographicalOrHistoricalInformation + ' '
+      _fulltext += efJSON.biographicalOrHistoricalInformation.replaceAll(', ', ' ') + ' '
 
     # same in both: dateOfEstablishment
     if efJSON?.dateOfEstablishment and fulltextConfig?.dateOfEstablishment
       for entry in efJSON.dateOfEstablishment
         _fulltext += entry + ' '
-
-    # missing in entityfacts: dateOfPublication
-    # if efJSON?.dateOfPublication and fulltextConfig?.dateOfPublication
-    #   for entry in efJSON.dateOfPublication
-    #     _fulltext += entry + ' '
 
     # same key in both; changed: lobid returns ISO date array, entityfacts returns a single formatted string
     if efJSON?.dateOfBirth and fulltextConfig?.dateOfBirth
@@ -112,23 +102,11 @@ class GNDUtil
     if efJSON?.dateOfTermination and fulltextConfig?.dateOfTermination
       _fulltext += efJSON.dateOfTermination + ' '
 
-    # missing in entityfacts: author
-    # if efJSON?.author and fulltextConfig?.author
-    #   for entry in efJSON.author
-    #     if entry.label
-    #       _fulltext += entry.label + ' '
-
-    # missing in entityfacts: firstAuthor
-    # if efJSON?.firstAuthor and fulltextConfig?.firstAuthor
-    #   for entry in efJSON.firstAuthor
-    #     if entry.label
-    #       _fulltext += entry.label + ' '
-
     # same in both: organizerOrHost
     if efJSON?.organizerOrHost and fulltextConfig?.organizerOrHost
       for entry in efJSON.organizerOrHost
-        if entry.label
-          _fulltext += entry.label + ' '
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
 
     # same in both: gender
     if efJSON?.gender and fulltextConfig?.gender
@@ -139,132 +117,86 @@ class GNDUtil
     # same in both: placeOfEvent
     if efJSON?.placeOfEvent and fulltextConfig?.placeOfEvent
       for entry in efJSON.placeOfEvent
-        if entry.label
-          _fulltext += entry.label + ' '
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
 
     # same in both: placeOfBirth
     if efJSON?.placeOfBirth and fulltextConfig?.placeOfBirth
       for entry in efJSON.placeOfBirth
-        if entry.label
-          _fulltext += entry.label + ' '
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
 
     # same in both: placeOfDeath
     if efJSON?.placeOfDeath and fulltextConfig?.placeOfDeath
       for entry in efJSON.placeOfDeath
-        if entry.label
-          _fulltext += entry.label + ' '
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
 
     # same in both: placeOfBusiness
     if efJSON?.placeOfBusiness and fulltextConfig?.placeOfBusiness
       for entry in efJSON.placeOfBusiness
-        if entry.label
-          _fulltext += entry.label + ' '
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
+
+    # newly added for entityfacts
+    if efJSON?.placeOfActivity and fulltextConfig?.placeOfActivity
+      for entry in efJSON.placeOfActivity
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
 
     # same in both: associatedPlace
     if efJSON?.associatedPlace and fulltextConfig?.associatedPlace
       for entry in efJSON.associatedPlace
-        if entry.label
-          _fulltext += entry.label + ' '
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
 
-    # missing in entityfacts: topic
-    # if efJSON?.topic and fulltextConfig?.topic
-    #   for entry in efJSON.topic
-    #     if entry.label
-    #       _fulltext += entry.label + ' '
+    # newly added for entityfacts
+    if efJSON?.associatedCountry and fulltextConfig?.associatedCountry
+      for entry in efJSON.associatedCountry
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
 
     # same in both: predecessor
     if efJSON?.predecessor and fulltextConfig?.predecessor
       for entry in efJSON.predecessor
-        if entry.label
-          _fulltext += entry.label + ' '
-
-    # changed: lobid 'precedingCorporateBody' is now covered by 'predecessor' in entityfacts (handled above)
-    # if efJSON?.precedingCorporateBody and fulltextConfig?.precedingCorporateBody
-    #   for entry in efJSON.precedingCorporateBody
-    #     if entry.label
-    #       _fulltext += entry.label + ' '
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
 
     # same in both: isA
     if efJSON?.isA and fulltextConfig?.isA
       for entry in efJSON.isA
-        if entry.label
-          _fulltext += entry.label + ' '
-
-    # missing in entityfacts: composer
-    # if efJSON?.composer and fulltextConfig?.composer
-    #   for entry in efJSON.composer
-    #     if entry.label
-    #       _fulltext += entry.label + ' '
-
-    # missing in entityfacts: relatedWork
-    # if efJSON?.relatedWork and fulltextConfig?.relatedWork
-    #   for entry in efJSON.relatedWork
-    #     if entry.label
-    #       _fulltext += entry.label + ' '
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
 
     # same in both: relatedPerson
     if efJSON?.relatedPerson and fulltextConfig?.relatedPerson
       for entry in efJSON.relatedPerson
-        if entry.label
-          _fulltext += entry.label + ' '
-
-    # changed: lobid 'precedingPlaceOrGeographicName' is now covered by 'predecessor' in entityfacts (handled above)
-    # if efJSON?.precedingPlaceOrGeographicName and fulltextConfig?.precedingPlaceOrGeographicName
-    #   for entry in efJSON.precedingPlaceOrGeographicName
-    #     if entry.label
-    #       _fulltext += entry.label + ' '
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
 
     # changed: lobid 'hierarchicalSuperiorOfTheCorporateBody' -> entityfacts 'isPartOf'
     if efJSON?.isPartOf and fulltextConfig?.hierarchicalSuperiorOfTheCorporateBody
       for entry in efJSON.isPartOf
-        if entry.label
-          _fulltext += entry.label + ' '
-
-    # missing in entityfacts: broaderTermInstantial
-    # if efJSON?.broaderTermInstantial and fulltextConfig?.broaderTermInstantial
-    #   for entry in efJSON.broaderTermInstantial
-    #     if entry.label
-    #       _fulltext += entry.label + ' '
-
-    # missing in entityfacts: broaderTermGeneral
-    # if efJSON?.broaderTermGeneral and fulltextConfig?.broaderTermGeneral
-    #   for entry in efJSON.broaderTermGeneral
-    #     if entry.label
-    #       _fulltext += entry.label + ' '
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
 
     # same in both: professionOrOccupation
     if efJSON?.professionOrOccupation and fulltextConfig?.professionOrOccupation
       for entry in efJSON.professionOrOccupation
-        if entry.label
-          _fulltext += entry.label + ' '
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
 
     # same in both: architect
     if efJSON?.architect and fulltextConfig?.architect
       for entry in efJSON.architect
-        if entry.label
-          _fulltext += entry.label + ' '
-
-    # missing in entityfacts: opusNumericDesignationOfMusicalWork
-    # if efJSON?.opusNumericDesignationOfMusicalWork and fulltextConfig?.opusNumericDesignationOfMusicalWork
-    #   for entry in efJSON.opusNumericDesignationOfMusicalWork
-    #     _fulltext += entry + ' '
-
-    # missing in entityfacts: definition
-    # if efJSON?.definition and fulltextConfig?.definition
-    #   for entry in efJSON.definition
-    #     _fulltext += entry + ' '
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
 
     # changed: lobid 'succeedingCorporateBody' -> entityfacts 'successor'
     if efJSON?.successor and fulltextConfig?.succeedingCorporateBody
       for entry in efJSON.successor
-        if entry.label
-          _fulltext += entry.label + ' '
-
-    # missing in entityfacts: succeedingPlaceOrGeographicName
-    # if efJSON?.succeedingPlaceOrGeographicName and fulltextConfig?.succeedingPlaceOrGeographicName
-    #   for entry in efJSON.succeedingPlaceOrGeographicName
-    #     if entry.label
-    #       _fulltext += entry.label + ' '
+        if entry.preferredName
+          _fulltext += entry.preferredName + ' '
 
     if efJSON?.location and fulltextConfig?.location
       efJsonGeoJson = @.getGEOJSONFromObject(efJSON)

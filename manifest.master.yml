@@ -128,92 +128,117 @@ base_config:
   - name: fulltext_gnd
     group: include_in_fulltext_search
     parameters:
-      variantName:
+      id:
         type: bool
         default: true
         position: 1
-      biographicalOrHistoricalInformation:
+      gndIdentifier:
         type: bool
         default: true
         position: 2
-      dateOfEstablishment:
+      preferredName:
         type: bool
         default: true
         position: 3
-      dateOfBirth:
+      variantName:
         type: bool
         default: true
         position: 4
-      dateOfProduction:
+      completeName:
         type: bool
         default: true
         position: 5
-      dateOfDeath:
+      biographicalOrHistoricalInformation:
         type: bool
         default: true
         position: 6
-      dateOfTermination:
+      dateOfEstablishment:
         type: bool
         default: true
         position: 7
-      organizerOrHost:
+      dateOfBirth:
         type: bool
         default: true
         position: 8
-      gender:
+      dateOfProduction:
         type: bool
         default: true
         position: 9
-      placeOfEvent:
+      dateOfDeath:
         type: bool
         default: true
         position: 10
-      placeOfBirth:
+      dateOfTermination:
         type: bool
         default: true
         position: 11
-      placeOfDeath:
+      organizerOrHost:
         type: bool
         default: true
         position: 12
-      placeOfBusiness:
+      gender:
         type: bool
         default: true
         position: 13
-      associatedPlace:
+      placeOfEvent:
         type: bool
         default: true
         position: 14
-      predecessor:
+      placeOfBirth:
         type: bool
         default: true
         position: 15
-      isA:
+      placeOfDeath:
         type: bool
         default: true
         position: 16
-      relatedPerson:
+      placeOfBusiness:
         type: bool
         default: true
         position: 17
-      isPartOf:
+      placeOfActivity:
         type: bool
         default: true
         position: 18
-      professionOrOccupation:
+      associatedPlace:
         type: bool
         default: true
         position: 19
-      architect:
+      associatedCountry:
         type: bool
         default: true
         position: 20
-      successor:
+      predecessor:
         type: bool
         default: true
         position: 21
-      location:
+      isA:
         type: bool
         default: true
         position: 22
+      relatedPerson:
+        type: bool
+        default: true
+        position: 23
+      isPartOf:
+        type: bool
+        default: true
+        position: 24
+      professionOrOccupation:
+        type: bool
+        default: true
+        position: 25
+      architect:
+        type: bool
+        default: true
+        position: 26
+      successor:
+        type: bool
+        default: true
+        position: 27
+      location:
+        type: bool
+        default: true
+        position: 28
+
         
