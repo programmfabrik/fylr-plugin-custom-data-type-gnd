@@ -61,7 +61,7 @@ class GNDUtil
 
     # missing in entityfacts: gndIdentifier, replace with derivative of @id
     if efJSON['@id'] and fulltextConfig?.gndIdentifier
-      _fulltext = efJSON['@id'].split('/').at(-1) + ' '
+      _fulltext += efJSON['@id'].split('/').at(-1) + ' '
     
     # same in both: preferredName
     if efJSON?.preferredName and fulltextConfig?.preferredName

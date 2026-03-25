@@ -168,7 +168,7 @@ main = (payload) => {
                             // get desired language for preflabel. This is frontendlanguage from original data...
                             let desiredLanguage = originalCdata.frontendLanguage;
                             // lock in save data
-                            newCdata.conceptURI = data.id;
+                            newCdata.conceptURI = data['@id'];
                             newCdata.conceptName = data.preferredName;
 
                             // if no frontendLanguage exists in originalData: add
