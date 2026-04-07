@@ -315,9 +315,12 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
               extendedInfo_xhr = new (CUI.XHR)(url: xurl)
               extendedInfo_xhr.start()
               .done((data, status, statusText) ->
+                # note: subjectheadings and works are not part of entityfacts yet
+                # --> data will be empty, which is handled by falling back to cdata-defaults from autocomplete
+
                 pluginConfig = ez5.session.getBaseConfig("plugin", "custom-data-type-gnd")
                 
-                cdata.conceptURI = data['@id']
+                cdata.conceptURI = data['@id'] ? cdata.conceptURI
 
                 databaseLanguages = that.getDatabaseLanguages()
                 
@@ -330,7 +333,7 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
                     cdata.conceptGeoJSON = geoJSON
 
                 cdata._fulltext =
-                  text: GNDUtil.getFullTextFromEntityFactsJSON(data, pluginConfig)
+                  text: GNDUtil.getFullTextFromEntityFactsJSON(data, cdata, pluginConfig)
               )
 
               .always(() ->

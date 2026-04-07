@@ -99,16 +99,18 @@ main = (payload) => {
             let requests = [];
 
             URIList.forEach((uri) => {
-                var gndURIParts = uri.split('/');
-                let gndID = gndURIParts.pop();
-                let dataRequestUrl = `https://uri.gbv.de/terminology/entityfacts/${gndID}?format=json`
-                let dataRequest = fetch(dataRequestUrl);
-                requests.push({
-                    url: dataRequestUrl,
-                    uri: uri,
-                    request: dataRequest
-                });
-                requestUrls.push(dataRequest);
+                if(uri) {
+                    var gndURIParts = uri.split('/');
+                    let gndID = gndURIParts.pop();
+                    let dataRequestUrl = `https://uri.gbv.de/terminology/entityfacts/${gndID}?format=json`
+                    let dataRequest = fetch(dataRequestUrl);
+                    requests.push({
+                        url: dataRequestUrl,
+                        uri: uri,
+                        request: dataRequest
+                    });
+                    requestUrls.push(dataRequest);
+                }
             });
 
             Promise.all(requestUrls).then(function (responses) {
@@ -168,8 +170,8 @@ main = (payload) => {
                             // get desired language for preflabel. This is frontendlanguage from original data...
                             let desiredLanguage = originalCdata.frontendLanguage;
                             // lock in save data
-                            newCdata.conceptURI = data['@id'];
-                            newCdata.conceptName = data.preferredName;
+                            newCdata.conceptURI = data['@id'] ?? originalCdata.conceptURI;
+                            newCdata.conceptName = data.preferredName ?? originalCdata.conceptName;
 
                             // if no frontendLanguage exists in originalData: add
                             if (!originalCdata?.frontendLanguage?.length == 2) {
@@ -188,7 +190,7 @@ main = (payload) => {
                             }
 
                             newCdata._fulltext = {}
-                            newCdata._fulltext.text = GNDUtil.getFullTextFromEntityFactsJSON(data, info?.config?.plugin?.['custom-data-type-gnd']?.config);
+                            newCdata._fulltext.text = GNDUtil.getFullTextFromEntityFactsJSON(data, newCdata, info?.config?.plugin?.['custom-data-type-gnd']?.config);
 
 
                             if (hasChanges(payload.objects[index].data, newCdata)) {

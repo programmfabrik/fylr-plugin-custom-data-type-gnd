@@ -48,7 +48,7 @@ class GNDUtil
       return false
 
     
-  @getFullTextFromEntityFactsJSON: (efJSON, pluginConfig) ->
+  @getFullTextFromEntityFactsJSON: (efJSON, cdata, pluginConfig) ->
     _fulltext = ''
 
     if not pluginConfig?.fulltext_gnd
@@ -56,16 +56,25 @@ class GNDUtil
     fulltextConfig = pluginConfig.fulltext_gnd
     
     # changed: lobid used 'id', entityfacts uses '@id'
-    if efJSON['@id'] and fulltextConfig?.id
-      _fulltext += efJSON['@id'] + ' '
+    if fulltextConfig?.id
+      if efJSON['@id'] and 
+        _fulltext += efJSON['@id'] + ' '
+      else
+        _fulltext += cdata.conceptURI + ' '
 
     # missing in entityfacts: gndIdentifier, replace with derivative of @id
-    if efJSON['@id'] and fulltextConfig?.gndIdentifier
-      _fulltext += efJSON['@id'].split('/').at(-1) + ' '
+    if fulltextConfig?.gndIdentifier
+      if efJSON['@id'] 
+        _fulltext += efJSON['@id'].split('/').at(-1) + ' '
+      else 
+        _fulltext += cdata.conceptURI.split('/').at(-1) + ' '
     
     # same in both: preferredName
-    if efJSON?.preferredName and fulltextConfig?.preferredName
-      _fulltext += efJSON.preferredName + ' '
+    if fulltextConfig?.preferredName
+      if efJSON?.preferredName and 
+        _fulltext += efJSON.preferredName + ' '
+      else 
+        _fulltext += cdata.conceptName + ' '
 
     # same in both: variantName
     if efJSON?.variantName and fulltextConfig?.variantName
