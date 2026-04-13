@@ -40,12 +40,12 @@ function getConfigFromAPI() {
                 if (response.ok) {
                     resolve(response.json());
                 } else {
-                    console.error("gnd-Updater: Fehler bei der Anfrage an /config ");
+                    console.error("gnd-Updater: Fehler bei der Anfrage an /config via " + url + ": " + response.status + " " + response.statusText);
                 }
             })
             .catch(error => {
                 console.error(error);
-                console.error("gnd-Updater: Fehler bei der Anfrage an /config");
+                console.error("gnd-Updater: Fehler bei der Anfrage an /config via " + url + ": " + error.toString());
             });
     });
 }
