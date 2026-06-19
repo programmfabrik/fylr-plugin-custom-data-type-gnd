@@ -57,7 +57,7 @@ class GNDUtil
     
     # changed: lobid used 'id', entityfacts uses '@id'
     if fulltextConfig?.id
-      if efJSON['@id'] and 
+      if efJSON['@id'] 
         _fulltext += efJSON['@id'] + ' '
       else
         _fulltext += cdata.conceptURI + ' '

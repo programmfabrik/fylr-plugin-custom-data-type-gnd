@@ -317,6 +317,8 @@ class CustomDataTypeGND extends CustomDataTypeWithCommonsAsPlugin
               .done((data, status, statusText) ->
                 # note: subjectheadings and works are not part of entityfacts yet
                 # --> data will be empty, which is handled by falling back to cdata-defaults from autocomplete
+                if !data
+                  data = {}
 
                 pluginConfig = ez5.session.getBaseConfig("plugin", "custom-data-type-gnd")
                 

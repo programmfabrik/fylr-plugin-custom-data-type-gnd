@@ -99,7 +99,7 @@ main = (payload) => {
             let requests = [];
 
             URIList.forEach((uri) => {
-                if(uri) {
+                if (uri) {
                     var gndURIParts = uri.split('/');
                     let gndID = gndURIParts.pop();
                     let dataRequestUrl = `https://uri.gbv.de/terminology/entityfacts/${gndID}?format=json`
@@ -126,7 +126,11 @@ main = (payload) => {
                         error: null
                     };
                     if (response.ok) {
-                        result.data = response.json();
+                        if (response.headers.get('content-length') === '0') {
+                            result.data = null
+                        } else {
+                            result.data = response.json();
+                        }
                     } else {
                         result.error = "Error fetching data from " + url + ": " + response.status + " " + response.statusText;
                     }
