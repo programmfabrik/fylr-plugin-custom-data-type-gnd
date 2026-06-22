@@ -24,11 +24,11 @@ custom_types:
   gnd:
     mapping:
       conceptName:
-        type: text
+        type: string
       conceptURI:
-        type: text
+        type: string
       conceptAncestors:
-        type: text
+        type: string
       conceptGeoJSON:
         type: geo_json
       facetTerm:
