@@ -24,15 +24,19 @@ custom_types:
   gnd:
     mapping:
       conceptName:
-        type: string
+        type: text
       conceptURI:
-        type: string
+        type: text
+        skipTerms: true
       conceptAncestors:
-        type: string
+        type: text
+        skipTerms: true
       conceptGeoJSON:
         type: geo_json
+        skipTerms: true
       facetTerm:
         type: text_l10n
+        skipTerms: true
     config:
       schema:
         - name: add_differentiatedpersons
