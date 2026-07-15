@@ -6,8 +6,20 @@ plugin:
     de-DE: gnd-Verknüpfung
     en-US: gnd-Referencing
   info:
-    de-DE: Stellt Verknüpfungen mit der Gemeinsamen Normdatei (GND) her.
-    en-US: Use for references to entities of the Integrated Authority File (GND)
+    de-DE: |
+      Ergänzt fylr um einen Feldtyp (Custom Data Type), mit dem sich Datensätze mit Einträgen der [Gemeinsamen Normdatei (GND)](https://de.wikipedia.org/wiki/Gemeinsame_Normdatei) verknüpfen lassen. Redakteure suchen und wählen Personen, Körperschaften, Schlagwörter, Geografika, Werke und Ereignisse direkt im Maskenfeld.
+
+      - Autocomplete-Vorschläge über den Suggest-Dienst des GBV
+      - Optionale Zusatzinformationen beim Überfahren via EntityFacts-API der Deutschen Nationalbibliothek
+      - Speicherung von GeoJSON-Koordinaten für Orte und Geografika
+      - Nächtlicher Abgleich verknüpfter Einträge über lobid.org/gnd
+    en-US: |
+      Adds a custom data type for linking records to entities of the German [Integrated Authority File (GND)](https://en.wikipedia.org/wiki/Integrated_Authority_File). Editors search and pick persons, corporate bodies, subject headings, places, works, and events directly in a mask field.
+
+      - Autocomplete suggestions from the GBV suggest service
+      - Optional extra details on hover via the Deutsche Nationalbibliothek EntityFacts API
+      - Stores GeoJSON coordinates for places and geographic names
+      - Nightly synchronization of linked entries via lobid.org/gnd
   server:
     api-version:
       require: 1
@@ -17,9 +29,8 @@ plugin:
     css: customDataTypeGND.css
     dependencies:
       - commons-library
-    
+
 base_url_prefix: "webfrontend"
-    
 custom_types:
   gnd:
     mapping:
@@ -67,7 +78,7 @@ custom_types:
           parameters:
             value:
               type: select
-              options: ["ALLE","SubjectHeadingSensoStricto","HistoricSingleEventOrEra","GroupOfPersons","CharactersOrMorphemes","MeansOfTransportWithIndividual_name","FictiveTerm","NomenclatureInBiologyOrChemistry","ProductNameOrBrandName","SoftwareProduct","Language","EthnographicName","MeansOfTransportWithIndividualName","ReligiousTerritory","NaturalGeographicUnit","TerritorialCorporateBodyOrAdministrativeUnit","FictivePlace","BuildingOrMemorial","Country","AdministrativeUnit","ExtraterrestrialTerritory","MemberState","WayBorderOrLine","NameOfSmallGeographicUnitLyingWithinAnotherGeographicUnit","FictiveCorporateBody","OrganOfCorporateBody","ProjectOrProgram","Pseudonym","LiteraryOrLegendaryCharacter","Spirits","RoyalOrMemberOfARoyalHouse","CollectivePseudonym","Gods"]
+              options: ["ALLE", "SubjectHeadingSensoStricto", "HistoricSingleEventOrEra", "GroupOfPersons", "CharactersOrMorphemes", "MeansOfTransportWithIndividual_name", "FictiveTerm", "NomenclatureInBiologyOrChemistry", "ProductNameOrBrandName", "SoftwareProduct", "Language", "EthnographicName", "MeansOfTransportWithIndividualName", "ReligiousTerritory", "NaturalGeographicUnit", "TerritorialCorporateBodyOrAdministrativeUnit", "FictivePlace", "BuildingOrMemorial", "Country", "AdministrativeUnit", "ExtraterrestrialTerritory", "MemberState", "WayBorderOrLine", "NameOfSmallGeographicUnitLyingWithinAnotherGeographicUnit", "FictiveCorporateBody", "OrganOfCorporateBody", "ProjectOrProgram", "Pseudonym", "LiteraryOrLegendaryCharacter", "Spirits", "RoyalOrMemberOfARoyalHouse", "CollectivePseudonym", "Gods"]
       mask:
         - name: editor_display
           parameters:
@@ -93,7 +104,7 @@ custom_types:
       timeout: 60
       batch_size: 1
       expires_days: 1
-              
+
 base_config:
   - name: update_gnd
     group: update_custom_data_type
@@ -128,7 +139,7 @@ base_config:
     parameters:
       mapbox_api_key:
         type: text
-        position: 0        
+        position: 0
   - name: fulltext_gnd
     group: include_in_fulltext_search
     parameters:
@@ -245,4 +256,3 @@ base_config:
         default: true
         position: 28
 
-        
