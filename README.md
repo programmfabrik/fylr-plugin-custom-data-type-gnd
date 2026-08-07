@@ -5,7 +5,7 @@ This is a plugin for [fyr](http://docs.fylr.io/) with Custom Data Type `CustomDa
 The Plugins uses <http://ws.gbv.de/suggest/gnd/> for the autocomplete-suggestions and [EntityFacts API](<http://www.dnb.de/DE/Wir/Projekte/Abgeschlossen/entityFacts.html>) from Deutsche Nationalbibliothek for additional informations about GND entities. The nightly update mechanism uses the data service of <https://lobid.org/gnd>.
 
 ## installation
-The latest version of this plugin can be found [here](https://github.com/programmfabrik/fylr-plugin-custom-data-type-gnd/releases/latest/download/customDataTypeGND.zip).
+The latest version of this plugin can be found [here](https://github.com/programmfabrik/fylr-plugin-custom-data-type-gnd/releases/latest/download/fylr-plugin-custom-data-type-gnd.zip).
 
 The ZIP can be downloaded and installed using the plugin manager, or used directly (recommended).
 
