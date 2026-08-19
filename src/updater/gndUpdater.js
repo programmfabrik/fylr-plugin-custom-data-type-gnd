@@ -1,5 +1,6 @@
 const fs = require('fs')
 const https = require('https')
+const path = require('path');
 
 let databaseLanguages = [];
 let frontendLanguages = [];
@@ -8,6 +9,9 @@ let defaultLanguage = 'de';
 let info = {}
 
 let access_token = '';
+
+const slack_alert_cachefile = path.join('/tmp', 'gnd_last_slack_alert.json');
+let slack_cooldown_minutes = 60;
 
 if (process.argv.length >= 3) {
     info = JSON.parse(process.argv[2])
@@ -68,6 +72,8 @@ function getNewCustomExpiresAt() {
     return newExpiresAt.toISOString()
 }
 
+let errorInProcess = false;
+
 main = (payload) => {
     switch (payload.action) {
         case "start_update":
@@ -91,6 +97,8 @@ main = (payload) => {
             }
             // unique urilist
             URIList = [...new Set(URIList)]
+
+            console.error(URIList);
 
             let requestUrls = [];
             let requests = [];
@@ -159,7 +167,6 @@ main = (payload) => {
                     let originalURI = originalCdata.conceptURI;
 
                     const matchingRecordData = results.find(record => record.uri === originalURI);
-
                     if (matchingRecordData) {
                         // rematch uri, because maybe uri changed / rewrites ..
                         let uri = matchingRecordData.uri;
@@ -167,7 +174,8 @@ main = (payload) => {
                         ///////////////////////////////////////////////////////
                         // conceptName, conceptURI, _standard, _fulltext, facet, frontendLanguage, conceptGeoJSON
                         data = matchingRecordData.data;
-                        if (data) {
+                        // if data is not empty array
+                        if(Object.keys(data).length > 0){
                             // get desired language for preflabel. This is frontendlanguage from original data...
                             let desiredLanguage = originalCdata.frontendLanguage;
                             // lock in save data
@@ -202,25 +210,32 @@ main = (payload) => {
                             // set expires at for the custom data object according to the plugin base config
                             payload.objects[index].data._expires_at = getNewCustomExpiresAt()
                         }
-                    } else {
-                        console.error('No matching record found');
+                        else {                        
+                            console.error('GND-Updater: No entityfacts-record found for URI: ' + originalURI);                        
+                            outputErr('GND-Updater: No entityfacts-record found for URI: ' + originalURI);
+                            errorInProcess = true;
+                        }
                     }
                 });
-                outputData({
-                    "payload": payload.objects,
-                    "log": [payload.objects.length + " objects in payload"]
-                });
+                if(!errorInProcess) {
+                    outputData({
+                        "payload": payload.objects,
+                        "log": [payload.objects.length + " objects in payload"]
+                    });
+                }
             });
             // send data back for update
             break;
         case "end_update":
-            outputData({
-                "state": {
-                    "theend": 2,
-                    "log": ["done logging"]
-                }
-            });
-            break;
+            if (!errorInProcess) {
+                outputData({
+                    "state": {
+                        "theend": 2,
+                        "log": ["done logging"]
+                    }
+                });
+                break;
+            }
         default:
             outputErr("Unsupported action " + payload.action);
     }
@@ -236,15 +251,17 @@ outputData = (data) => {
 }
 
 outputErr = (err2) => {
-    let err = {
-        "status_code": 400,
-        "body": {
-            "error": err2.toString()
+    sendSlackAlert(err2.toString()).then(() => {
+        let err = {
+            "status_code": 400,
+            "body": {
+                "error": err2.toString()
+            }
         }
-    }
-    console.error(JSON.stringify(err))
-    process.stdout.write(JSON.stringify(err))
-    process.exit(0);
+        console.error(JSON.stringify(err))
+        process.stdout.write(JSON.stringify(err))
+        process.exit(0);
+    });
 }
 
 (() => {
@@ -275,6 +292,8 @@ outputErr = (err2) => {
             }
         }
     }
+
+    slack_cooldown_minutes = info?.config?.plugin?.['custom-data-type-gnd']?.config?.slack_channel?.slack_cooldown_minutes || slack_cooldown_minutes;
 
     access_token = info && info.plugin_user_access_token;
 

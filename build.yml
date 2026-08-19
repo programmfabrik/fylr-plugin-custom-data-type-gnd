@@ -23,6 +23,7 @@ build:
   - out: updater/gndUpdater.js
     sources:
     - src/updater/gndUpdater.js
+    - src/updater/sendSlackAlert.js
     - webfrontend/GNDUtil.coffee
   zip_aliases:
   - customDataTypeGND.zip
