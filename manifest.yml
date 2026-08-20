@@ -144,6 +144,10 @@ base_config:
         type: int
         default: 60
         position: 1
+      slack_buffer_enabled:
+        type: bool
+        default: false
+        position: 2
   - name: mapbox_gnd
     group: mapbox_update_custom_data_type
     parameters:

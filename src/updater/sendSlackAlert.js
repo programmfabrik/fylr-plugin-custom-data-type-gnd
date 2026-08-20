@@ -1,40 +1,103 @@
-function sendSlackAlert(message) {
+// include in main file!
+
+//const fs = require('fs');
+//const https = require('https');
+//const path = require('path');
+
+function sendSlackAlert({
+    message,
+    webhookUrl,
+    pluginName,
+    bufferEnabled = true,
+    cooldownMinutes = 60
+}) {
     return new Promise((resolve) => {
-        const webhookUrl = info?.config?.plugin?.['custom-data-type-gnd']?.config?.slack_channel?.slack_webhook_url;
-
-        if (!webhookUrl || !webhookUrl.startsWith('https://')) {
-            console.error('Keine gültige GND-Slack Webhook URL gesetzt. GND-Slack-Alert wird nicht gesendet.');
+        if (!webhookUrl || typeof webhookUrl !== 'string' || !webhookUrl.startsWith('https://')) {
+            console.error('[' + pluginName + '] Keine gültige Slack Webhook URL übergeben.');
             return resolve();
-        }
-
-        // spam protection: check if the last alert was sent less than slack_cooldown_minutes ago
-        let lastAlert = 0;
-        if (fs.existsSync(slack_alert_cachefile)) {
-            try {
-                const cache = JSON.parse(fs.readFileSync(slack_alert_cachefile, 'utf8'));
-                lastAlert = cache.timestamp || 0;
-            } catch (e) { }
         }
 
         const now = Date.now();
+        const currentTimeString = new Date().toISOString().substring(11, 19);
+        const sanitizedPluginName = pluginName.toLowerCase().replace(/[^a-z0-9_-]/g, '_');
+        const bufferFile = path.join('/tmp', 'slack_buffer_' + sanitizedPluginName + '.json');
 
-        console.error("slack_cooldown_minutes: " + slack_cooldown_minutes);
+        let bufferData = { lastAlert: 0, messages: [] };
 
-        if(now - lastAlert < slack_cooldown_minutes * 60 * 1000) {
-            console.error('GND-Slack-Alert gedrosselt. Sende nicht den Fehler');
-            return resolve();
+        if (fs.existsSync(bufferFile)) {
+            try {
+                bufferData = JSON.parse(fs.readFileSync(bufferFile, 'utf8'));
+                if (!Array.isArray(bufferData.messages)) bufferData.messages = [];
+            } catch (e) {
+                console.error('[' + pluginName + '] Fehler beim Lesen der Cooldown-Datei: ' + e.message);
+            }
         }
 
-        // timestamp for the next alert is written to the cache file, even if the Slack request fails, to avoid spamming in case of repeated errors
-        try {
-            fs.writeFileSync(slack_alert_cachefile, JSON.stringify({ timestamp: now, lastMessage: message }));
-        } catch (e) {
-            console.error('Konnte Cache-Datei für GND-Slack-Alerts nicht schreiben.');
+        const cooldownMs = cooldownMinutes * 60 * 1000;
+        const timeSinceLastAlert = now - (bufferData.lastAlert || 0);
+        const isCooldownActive = cooldownMinutes > 0 && bufferData.lastAlert > 0 && timeSinceLastAlert < cooldownMs;
+
+        // Buffer deactivated?
+        if (!bufferEnabled) {
+            // if cooldown active --> no message
+            if (isCooldownActive) {
+                console.error('[' + pluginName + '] Nachricht verworfen (Puffer aus, Cooldown aktiv).');
+                return resolve();
+            }
+            // if no cooldown -> prepare message
+            console.error('[' + pluginName + '] Puffer deaktiviert. Sende Direkt-Alert...');
+            payloadText = '*' + pluginName + ' Fehler-Report (Sofortbenachrichtigung):*\n```\n[' + currentTimeString + '] ' + message + '\n```';
+        } 
+        
+        // Buffer activated?
+        else {
+            if (!bufferData.lastAlert) {
+                bufferData.lastAlert = now;
+            }
+
+            // create new message for buffer
+            if (message) {
+                bufferData.messages.push({
+                    time: currentTimeString,
+                    text: message
+                });
+            }
+
+            // max 50 messages for buffer
+            if (bufferData.messages.length > 50) {
+                bufferData.messages = bufferData.messages.slice(-50);
+            }
+
+            // if buffer active AND cooldown: add message to buffer and resolve
+            if (isCooldownActive) {
+                try {
+                    fs.writeFileSync(bufferFile, JSON.stringify(bufferData, null, 2));
+                    console.error('[' + pluginName + '] Nachricht gepuffert (' + bufferData.messages.length + ' im Puffer, Cooldown aktiv).');
+                } catch (e) {
+                    console.error('[' + pluginName + '] Fehler beim Schreiben des Puffers: ' + e.message);
+                }
+                return resolve();
+            }
+
+            if (bufferData.messages.length === 0) {
+                return resolve();
+            }
+
+            const totalMessages = bufferData.messages.length;
+            const eventWord = totalMessages > 1 ? 'se' : '';
+            payloadText = '*' + pluginName + ' Fehler-Report (' + totalMessages + ' Ereignis' + eventWord + '):*\n```';
+            bufferData.messages.forEach(item => {
+                payloadText += '\n[' + item.time + '] ' + item.text;
+            });
+            payloadText += '\n```';
         }
 
-        const payload = JSON.stringify({
-            text: `*GND-Updater Fehler in fylr:*\n\`\`\`${message}\`\`\``
-        });
+        // char-limitation for slack messages
+        if (payloadText.length > 3500) {
+            payloadText = payloadText.substring(0, 3400) + '\n... [Nachricht gekürzt, zu lang für Slack. Bitte Logs prüfen.]```';
+        }
+
+        const payload = JSON.stringify({ text: payloadText });
 
         try {
             const urlObj = new URL(webhookUrl);
@@ -54,22 +117,28 @@ function sendSlackAlert(message) {
                 res.on('data', chunk => body += chunk);
                 res.on('end', () => {
                     if (res.statusCode === 200) {
-                        console.error("Slack-Alert erfolgreich gesendet! Antwort:", body);
+                        console.error('[' + pluginName + '] Slack-Alert erfolgreich gesendet!');
+                        try {
+                            // reset buffer
+                            fs.writeFileSync(bufferFile, JSON.stringify({ lastAlert: now, messages: [] }));
+                        } catch (e) {
+                            console.error('[' + pluginName + '] Fehler beim Aktualisieren der Status-Datei: ' + e.message);
+                        }
                     } else {
-                        console.error(`Slack Webhook HTTP Fehler: ${res.statusCode}, Body: ${body}`);
+                        console.error('[' + pluginName + '] Slack Webhook HTTP-Fehler: ' + res.statusCode + ', Body: ' + body);
                     }
                     resolve();
                 });
             });
 
             req.on('error', (err) => {
-                console.error('Fehler beim Senden des Slack Webhooks:', err.message);
+                console.error('[' + pluginName + '] Fehler beim Senden des Slack Webhooks: ' + err.message);
                 resolve();
             });
 
             req.on('timeout', () => {
                 req.destroy();
-                console.error('Slack Webhook Timeout nach 5s');
+                console.error('[' + pluginName + '] Slack Webhook Timeout nach 5s');
                 resolve();
             });
 
@@ -77,8 +146,10 @@ function sendSlackAlert(message) {
             req.end();
 
         } catch (err) {
-            console.error('Ungültige Slack Webhook URL:', err.message);
+            console.error('[' + pluginName + '] Ungültige Slack Webhook URL: ' + err.message);
             resolve();
         }
     });
 }
+
+module.exports = { sendSlackAlert };

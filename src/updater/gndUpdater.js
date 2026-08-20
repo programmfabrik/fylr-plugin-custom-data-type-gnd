@@ -10,8 +10,10 @@ let info = {}
 
 let access_token = '';
 
-const slack_alert_cachefile = path.join('/tmp', 'gnd_last_slack_alert.json');
 let slack_cooldown_minutes = 60;
+let slack_webhook_url = '';
+let slack_buffer_enabled = true;
+let plugin_name = 'fylr-plugin';
 
 if (process.argv.length >= 3) {
     info = JSON.parse(process.argv[2])
@@ -251,11 +253,20 @@ outputData = (data) => {
 }
 
 outputErr = (err2) => {
-    sendSlackAlert(err2.toString()).then(() => {
+    errorMessage = err2.toString();
+    sendSlackAlert(
+        {
+            message : errorMessage,
+            webhookUrl : slack_webhook_url,
+            pluginName : plugin_name,
+            bufferEnabled : true,
+            cooldownMinutes : slack_cooldown_minutes            
+        }
+    ).then(() => {
         let err = {
             "status_code": 400,
             "body": {
-                "error": err2.toString()
+                "error": errorMessage
             }
         }
         console.error(JSON.stringify(err))
@@ -294,6 +305,8 @@ outputErr = (err2) => {
     }
 
     slack_cooldown_minutes = info?.config?.plugin?.['custom-data-type-gnd']?.config?.slack_channel?.slack_cooldown_minutes || slack_cooldown_minutes;
+    slack_webhook_url = info?.config?.plugin?.['custom-data-type-gnd']?.config?.slack_channel?.slack_webhook_url || false;
+    plugin_name = Object.keys(info?.config?.plugin || 'fylr-plugin')[0];
 
     access_token = info && info.plugin_user_access_token;
 
