@@ -11,19 +11,24 @@
 server:
   install:
   - l10n/customDataTypeGND.csv
+  # assembled server-side files, sources in the order written
+  bundles:
+    - out: updater/gndUpdater.js
+      sources:
+      - src/updater/gndUpdater.js
+      - src/updater/sendSlackAlert.js
+      - webfrontend/GNDUtil.coffee
 webfrontend:
-  coffee1:
-  - webfrontend/CustomDataTypeGND.coffee
-  - webfrontend/CustomDataTypeGNDFacet.coffee
-  - webfrontend/GNDUtil.coffee
+  # assembled into plugin.webfrontend.url, in this order:
+  # .coffee is compiled (CoffeeScript 1.x), .scss compiled,
+  # anything else taken verbatim
+  bundles:
+    - sources:
+        - webfrontend/CustomDataTypeGND.coffee
+        - webfrontend/CustomDataTypeGNDFacet.coffee
+        - webfrontend/GNDUtil.coffee
   install:
   - webfrontend/customDataTypeGND.css
-build:
-  bundles:
-  - out: updater/gndUpdater.js
-    sources:
-    - src/updater/gndUpdater.js
-    - src/updater/sendSlackAlert.js
-    - webfrontend/GNDUtil.coffee
-  zip_aliases:
-  - customDataTypeGND.zip
+
+zip_aliases:
+- customDataTypeGND.zip
