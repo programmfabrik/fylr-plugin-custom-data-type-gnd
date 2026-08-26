@@ -134,20 +134,6 @@ base_config:
         min: 1
         default: 1
         position: 4
-  - name: slack_channel
-    group: slack_notification
-    parameters:
-      slack_webhook_url:
-        type: text
-        position: 0
-      slack_cooldown_minutes:
-        type: int
-        default: 60
-        position: 1
-      slack_buffer_enabled:
-        type: bool
-        default: false
-        position: 2
   - name: mapbox_gnd
     group: mapbox_update_custom_data_type
     parameters:

@@ -16,7 +16,6 @@ server:
     - out: updater/gndUpdater.js
       sources:
       - src/updater/gndUpdater.js
-      - src/updater/sendSlackAlert.js
       - webfrontend/GNDUtil.coffee
 webfrontend:
   # assembled into plugin.webfrontend.url, in this order:

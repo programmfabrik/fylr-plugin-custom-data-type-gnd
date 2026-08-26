@@ -154,6 +154,3 @@ custom.data.type.gnd.modal.form.popup.jskospreview.profession,Beruf,Profession
 custom.data.type.gnd.modal.form.popup.jskospreview.bio,Biographie,Biographie
 custom.data.type.gnd.modal.form.popup.jskospreview.topic,Themen,Topics
 custom.data.type.gnd.modal.form.popup.jskospreview.synonym,Synonyme,Synonyms
-server.config.name.system.slack_channel,Slack-Benachrichtigungseinstellungen (bei Update-Problemen),Slack-Notification-Settings (in case of update problems)
-server.config.parameter.system.slack_channel.slack_webhook_url.label,Slack Webhook URL,
-server.config.parameter.system.slack_channel.slack_cooldown_minutes.label,Slack Cooldown (in Minuten),Slack Cooldown (in minutes)
