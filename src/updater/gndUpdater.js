@@ -175,8 +175,9 @@ main = (payload) => {
                         ///////////////////////////////////////////////////////
                         // conceptName, conceptURI, _standard, _fulltext, facet, frontendLanguage, conceptGeoJSON
                         data = matchingRecordData.data;
+
                         // if data is not empty array
-                        if(Object.keys(data).length > 0){
+                        if(data && Object.keys(data).length > 0){
                             // get desired language for preflabel. This is frontendlanguage from original data...
                             let desiredLanguage = originalCdata.frontendLanguage;
                             // lock in save data
@@ -202,7 +203,6 @@ main = (payload) => {
                             newCdata._fulltext = {}
                             newCdata._fulltext.text = GNDUtil.getFullTextFromEntityFactsJSON(data, newCdata, info?.config?.plugin?.['custom-data-type-gnd']?.config);
 
-
                             if (hasChanges(payload.objects[index].data, newCdata)) {
                                 payload.objects[index].data = newCdata;
                             } else {
@@ -211,10 +211,19 @@ main = (payload) => {
                             // set expires at for the custom data object according to the plugin base config
                             payload.objects[index].data._expires_at = getNewCustomExpiresAt()
                         }
-                        else {                        
-                            console.error('GND-Updater: No entityfacts-record found for URI: ' + originalURI);                        
-                            outputErr('GND-Updater: No entityfacts-record found for URI: ' + originalURI);
-                            errorInProcess = true;
+                        else {               
+                            // if result is [], that record exists, but has no data in entityfacts
+                            if(data && typeof data === 'object' && Object.keys(data)?.length == 0) {
+                                console.error('Valid GND-ID, but no record in entityfacts given: ' + originalURI);                        
+                                // keep old data
+                                payload.objects[index].data = originalCdata
+                            }
+                            // else .. record does not exist in GND --> error
+                            else {                            
+                                console.error('GND-Updater: No GND-record found for URI: ' + originalURI);                        
+                                outputErr('GND-Updater: No GND-record found for URI: ' + originalURI);
+                                errorInProcess = true;
+                            }
                         }
                     }
                 });
