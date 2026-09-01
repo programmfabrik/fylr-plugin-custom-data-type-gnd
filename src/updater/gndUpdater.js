@@ -104,12 +104,37 @@ main = (payload) => {
             let requestUrls = [];
             let requests = [];
 
+            ////////////////////////////////////////////////////////////////////////////
+            // Replace URIs?
+            ////////////////////////////////////////////////////////////////////////////
+
+            // check if replacements are configured for the URIs
+            let replacements = false;
+            let replaceURIs = info.config.plugin['custom-data-type-gnd']?.config?.update_gnd?.replace_gnd_uri;
+            replaceURIs = JSON.parse(replaceURIs);
+            
+            if(replaceURIs?.data_table?.length > 0) {
+                replaceURIs = replaceURIs.data_table;
+                const uriMap = replaceURIs.reduce((acc, item) => {
+                        acc[item.from] = item.to;
+                        return acc;
+                    }, {});
+                replaceURIs = uriMap;
+            }
+            
+            if(Object.keys(replaceURIs).length) {
+                replacements = replaceURIs;
+            }
+
             URIList.forEach((uri) => {
                 if (uri) {
-                    var gndURIParts = uri.split('/');
+                    // check for replacement
+                    let effectiveURI = (replacements && replacements[uri]) ? replacements[uri] : uri;
+                    var gndURIParts = effectiveURI.split('/');
                     let gndID = gndURIParts.pop();
-                    let dataRequestUrl = `https://uri.gbv.de/terminology/entityfacts/${gndID}?format=json`
+                    let dataRequestUrl = `https://uri.gbv.de/terminology/entityfacts/${gndID}?format=json`;
                     let dataRequest = fetch(dataRequestUrl);
+
                     requests.push({
                         url: dataRequestUrl,
                         uri: uri,
@@ -211,7 +236,9 @@ main = (payload) => {
                             // set expires at for the custom data object according to the plugin base config
                             payload.objects[index].data._expires_at = getNewCustomExpiresAt()
                         }
-                        else {               
+                        else {    
+                            // set expires at for the custom data object according to the plugin base config
+                            payload.objects[index].data._expires_at = getNewCustomExpiresAt()
                             // if result is [], that record exists, but has no data in entityfacts
                             if(data && typeof data === 'object' && Object.keys(data)?.length == 0) {
                                 console.error('Valid GND-ID, but no record in entityfacts given: ' + originalURI);                        
