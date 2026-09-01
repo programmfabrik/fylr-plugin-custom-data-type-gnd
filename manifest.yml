@@ -134,6 +134,11 @@ base_config:
         min: 1
         default: 1
         position: 4
+      replace_gnd_uri:
+        type: text
+        plugin_type: replace-gnd-uri-form
+        store_as_json: true
+        position: 5
   - name: mapbox_gnd
     group: mapbox_update_custom_data_type
     parameters:

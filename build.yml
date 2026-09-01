@@ -26,6 +26,7 @@ webfrontend:
         - webfrontend/CustomDataTypeGND.coffee
         - webfrontend/CustomDataTypeGNDFacet.coffee
         - webfrontend/GNDUtil.coffee
+        - webfrontend/replace-gnd-uri-form.coffee
   install:
   - webfrontend/customDataTypeGND.css
 

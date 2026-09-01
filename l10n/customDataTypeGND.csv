@@ -154,3 +154,6 @@ custom.data.type.gnd.modal.form.popup.jskospreview.profession,Beruf,Profession
 custom.data.type.gnd.modal.form.popup.jskospreview.bio,Biographie,Biographie
 custom.data.type.gnd.modal.form.popup.jskospreview.topic,Themen,Topics
 custom.data.type.gnd.modal.form.popup.jskospreview.synonym,Synonyme,Synonyms
+server.config.parameter.system.update_gnd.replace_gnd_uri.label,Während des Updates GND-URIs ersetzen?,Replace GND-URIs in update?
+replacegnduriform.data_table.from_gnd_uri,Von GND-URI,From GND-URI
+replacegnduriform.data_table.to_gnd_uri,Zu GND-URI,To GND-URI
