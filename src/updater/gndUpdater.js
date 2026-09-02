@@ -111,7 +111,17 @@ main = (payload) => {
             // check if replacements are configured for the URIs
             let replacements = false;
             let replaceURIs = info.config.plugin['custom-data-type-gnd']?.config?.update_gnd?.replace_gnd_uri;
-            replaceURIs = JSON.parse(replaceURIs);
+
+            if (typeof replaceURIs === 'string' && replaceURIs.trim() !== '') {
+                try {
+                    replaceURIs = JSON.parse(replaceURIs);
+                } catch (e) {
+                    console.error('Fehler beim Parsen von replace_gnd_uri:', e);
+                    replaceURIs = false;
+                }
+            } else {
+                replaceURIs = false;
+            }            
             
             if(replaceURIs?.data_table?.length > 0) {
                 replaceURIs = replaceURIs.data_table;
@@ -120,10 +130,9 @@ main = (payload) => {
                         return acc;
                     }, {});
                 replaceURIs = uriMap;
-            }
-            
-            if(Object.keys(replaceURIs).length) {
-                replacements = replaceURIs;
+                if(Object.keys(replaceURIs).length) {
+                    replacements = replaceURIs;
+                }
             }
 
             URIList.forEach((uri) => {
