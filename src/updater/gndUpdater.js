@@ -10,9 +10,6 @@ let info = {}
 
 let access_token = '';
 
-let slack_cooldown_minutes = 60;
-let slack_webhook_url = '';
-let slack_buffer_enabled = true;
 let plugin_name = 'fylr-plugin';
 let instance_name = 'fylr-instance';
 
